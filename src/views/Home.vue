@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home bg-black">
     <img alt="Vue logo" src="../assets/iconNB.png" />
     <login msg="Welcome to Your Vue.js App" />
   </div>
@@ -15,5 +15,4 @@ export default {
     login,
   },
 };
-
 </script>
