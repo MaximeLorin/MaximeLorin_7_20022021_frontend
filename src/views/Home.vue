@@ -1,6 +1,5 @@
 <template>
-  <div class="home bg-black">
-    <img alt="Vue logo" src="../assets/iconNB.png" />
+  <div id="homePage">
     <login msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -16,3 +15,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#homePage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="login " class="bg-gray-600 w-full">
+  <div id="login">
     <h2 class="login__title">Login</h2>
     <input
       v-model="userName"
@@ -53,4 +53,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style lang="scss" scoped>
+#login {
+  background-color: black;
+  height: 25%;
+  width: 80%;
+}
+</style>
