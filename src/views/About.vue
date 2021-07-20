@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <sidebar />
 </template>
+<script>
+// @ is an alias to /src
+import sidebar from "@/components/sidebar.vue";
+
+export default {
+  name: "About",
+  components: {
+    sidebar,
+  },
+};
+</script>
+
+<style lang="scss"></style>

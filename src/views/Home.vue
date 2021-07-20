@@ -23,6 +23,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(110, 110, 110);
+  background-color: rgb(238, 238, 238);
 }
 </style>

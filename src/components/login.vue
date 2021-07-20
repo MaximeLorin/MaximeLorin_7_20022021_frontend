@@ -91,6 +91,7 @@ export default {
   border-radius: 5%;
   width: 40%;
   height: 10%;
+  border: solid 2px grey;
   background-color: white;
 }
 #password {

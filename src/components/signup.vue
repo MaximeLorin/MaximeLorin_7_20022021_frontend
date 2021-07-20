@@ -10,7 +10,7 @@
       placeholder="Adresse mail"
       required
       minlength="4"
-      maxlength="15"
+      maxlength="50"
       size="8"
     />
     <input
@@ -21,12 +21,13 @@
       placeholder="Mot de passe"
       required
       minlength="4"
-      maxlength="8"
+      maxlength="50"
       size="8"
     />
     <button class="signup__button" type="button" @click="connectToApi">
       S'inscrire
     </button>
+    <a href="">Se connecter</a>
   </div>
 </template>
 
@@ -87,18 +88,23 @@ export default {
 }
 #userName {
   font-size: 0.95rem;
-  padding: 5px;
-  border-radius: 5%;
-  width: 40%;
-  height: 10%;
+  padding-left: 15px;
+  padding-right: 20px;
+  border-radius: 17.5px;
+  width: 110px;
+  height: 25px;
+  border: solid 2px grey;
   background-color: white;
 }
 #password {
   font-size: 0.95rem;
-  padding: 5px;
-  border-radius: 5%;
-  width: 40%;
-  height: 10%;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 17.5px;
+  width: 110px;
+  height: 25px;
+  border: solid 2px grey;
+
   background-color: white;
 }
 </style>
