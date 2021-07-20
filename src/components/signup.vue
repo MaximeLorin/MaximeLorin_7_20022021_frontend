@@ -1,8 +1,8 @@
 <template>
-  <div id="login">
-    <h2 class="login__title">Se connecter</h2>
+  <div id="signup">
+    <h2 class="signup__title">Inscrivez-vous</h2>
     <input
-      class="login__input"
+      class="signup__input"
       v-model="userName"
       type="text"
       id="userName"
@@ -14,7 +14,7 @@
       size="8"
     />
     <input
-      class="login__input"
+      class="signup__input"
       type="password"
       id="password"
       name="password"
@@ -24,8 +24,8 @@
       maxlength="8"
       size="8"
     />
-    <button class="login__button" type="button" @click="connectToApi">
-      Connection
+    <button class="signup__button" type="button" @click="connectToApi">
+      S'inscrire
     </button>
   </div>
 </template>
@@ -58,7 +58,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-#login {
+#signup {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -72,7 +72,7 @@ export default {
   width: 80%;
   padding: 5%;
 }
-.login__button {
+.signup__button {
   font-weight: bold;
   border-radius: 17.5px;
   width: 90px;

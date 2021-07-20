@@ -1,17 +1,17 @@
 <template>
   <div id="homePage">
-    <login msg="Welcome to Your Vue.js App" />
+    <signup />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import login from "@/components/login.vue";
+import signup from "@/components/signup.vue";
 
 export default {
   name: "Home",
   components: {
-    login,
+    signup,
   },
 };
 </script>
@@ -23,6 +23,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: grey;
+  background-color: rgb(110, 110, 110);
 }
 </style>
