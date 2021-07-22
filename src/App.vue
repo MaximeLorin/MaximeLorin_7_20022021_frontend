@@ -2,10 +2,7 @@
   <header id="header" class="header">
     <img class="header__img" src="./assets/iconNB.png" alt="logo groupomania" />
   </header>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+
   <router-view />
 </template>
 <script></script>
@@ -20,6 +17,9 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+}
+a {
+  color: white;
 }
 input,
 label,

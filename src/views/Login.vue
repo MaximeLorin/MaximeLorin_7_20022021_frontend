@@ -1,0 +1,27 @@
+<template>
+  <div id="login">
+    <loginComp />
+  </div>
+</template>
+<script>
+// @ is an alias to /src
+import loginComp from "@/components/loginComp.vue";
+
+export default {
+  name: "Login",
+  components: {
+    loginComp,
+  },
+};
+</script>
+
+<style lang="scss">
+#login {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(238, 238, 238);
+}
+</style>

@@ -1,23 +1,23 @@
 <template>
-  <div id="homePage">
-    <signup />
+  <div id="signup">
+    <signupComp />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import signup from "@/components/signup.vue";
+import signupComp from "@/components/signupComp.vue";
 
 export default {
-  name: "Home",
+  name: "Signup",
   components: {
-    signup,
+    signupComp,
   },
 };
 </script>
 
 <style lang="scss">
-#homePage {
+#signup {
   height: 100%;
   width: 100%;
   display: flex;

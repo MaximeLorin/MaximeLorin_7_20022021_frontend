@@ -27,14 +27,13 @@
     <button class="signup__button" type="button" @click="connectToApi">
       S'inscrire
     </button>
-    <a href="">Se connecter</a>
+    <router-link to="/login">Se connecter</router-link>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  name: "HelloWorld",
+  name: "signupComp",
   data: function() {
     return {
       userName: "",
@@ -47,11 +46,8 @@ export default {
   methods: {
     async connectToApi() {
       let content = { userName: this.userName, password: this.password };
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/signup/",
-        content
-      );
-      return console.log(response);
+
+      await this.$store.dispatch("authentication/signup", content);
     },
   },
 };
