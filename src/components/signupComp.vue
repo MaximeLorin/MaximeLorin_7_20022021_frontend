@@ -16,6 +16,7 @@
     <input
       class="signup__input"
       type="password"
+      v-model="password"
       id="password"
       name="password"
       placeholder="Mot de passe"

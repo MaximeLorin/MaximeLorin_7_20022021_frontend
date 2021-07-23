@@ -4,13 +4,14 @@ import store from "..";
 const mutationType = {
   SET_USER_ID: "SET_USER_ID",
   SET_USER_TOKEN: "SET_USER_TOKEN",
-  // IS_USER_CONNECTED: 0,
+  IS_USER_CONNECTED: "IS_USER_CONNECTED",
 };
+//const IS_USER_CONNECTED = "IS_USER_CONNECTED";
 
 const authentication = {
   namespaced: true,
-  state: () => ({ userId: null, token: null }),
-  isConnected: 0,
+  state: () => ({ userId: null, token: null, isConnected: 0 }),
+
   mutations: {
     [mutationType.SET_USER_ID](state, userId) {
       state.userId = userId;
@@ -18,11 +19,8 @@ const authentication = {
     [mutationType.SET_USER_TOKEN](state, token) {
       state.token = token;
     },
-    increment(state) {
-      state.isConnected++;
-    },
-    substract(state) {
-      state.isConnected--;
+    [mutationType.IS_USER_CONNECTED](state, increment) {
+      state.isConnected = increment;
     },
   },
   actions: {
@@ -38,6 +36,10 @@ const authentication = {
         );
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
+        if (response.data) {
+          commit(mutationType.IS_USER_CONNECTED, 1);
+          localStorage.setItem("user", JSON.stringify(store.state));
+        }
         console.log(response.data);
       } catch (err) {
         console.log(err);
@@ -56,16 +58,16 @@ const authentication = {
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
         if (response.data) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          store.commit("increment");
-          localStorage.setItem("isConnected", store.isConnected);
+          commit(mutationType.IS_USER_CONNECTED, 1);
+          localStorage.setItem("user", JSON.stringify(store.state));
         }
-        console.log(response.data.token);
+        console.log(response.data);
       } catch (err) {
         console.log({ err });
       }
     },
   },
+
   getters: {},
 };
 

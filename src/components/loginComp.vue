@@ -16,6 +16,7 @@
     <input
       class="login__input"
       type="password"
+      v-model="password"
       id="password"
       name="password"
       placeholder="Mot de passe"
@@ -38,6 +39,7 @@ export default {
     return {
       userName: "",
       password: "",
+      isConnected: null,
     };
   },
   props: {
@@ -48,6 +50,20 @@ export default {
       let content = { userName: this.userName, password: this.password };
       await this.$store.dispatch("authentication/login", content);
     },
+    reconnectOnRefresh() {
+      let connectInfo = JSON.parse(localStorage.getItem("user"));
+      console.log(connectInfo);
+
+      if (connectInfo.authentication.isConnected === 1) {
+        this.connectToApi();
+      }
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user")) {
+      this.reconnectOnRefresh();
+    }
+    //localStorage.setItem("user", JSON.stringify(this.$store.state));
   },
 };
 </script>
