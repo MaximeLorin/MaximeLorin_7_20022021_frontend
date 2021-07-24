@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Signup from "../views/Signup.vue";
 import About from "../views/About.vue";
 import Login from "../views/Login.vue";
+import store from "../store";
 const routes = [
   {
     path: "/",
@@ -11,17 +12,20 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+
     component: About,
+    beforeEnter: (to, from, next) => {
+      if (store.state.authentication.isConnected === 0) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/login",
     name: "Login",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+
     component: Login,
   },
 ];

@@ -1,8 +1,13 @@
 <template>
-  <div id="sidebar" class="sidebar">
-    <fa icon="cog" class="sidebar__icon" />
+  <div class="test" @click="disconnect">
     <fa icon="sign-in-alt" class="sidebar__icon" />
   </div>
+  <transition name="show">
+    <div id="sidebar" class="sidebar" v-if="open">
+      <fa icon="cog" class="sidebar__icon" />
+      <fa icon="sign-in-alt" class="sidebar__icon" />
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -10,25 +15,34 @@ export default {
   name: "sidebar",
   data: function() {
     return {
-      userName: "",
-      password: "",
+      showSideIcon: false,
     };
   },
-  props: {
-    msg: String,
+  props: ["open"],
+  methods: {
+    disconnect() {
+      console.log("click");
+      this.$store.dispatch("authentication/disconnect");
+      this.$router.replace({ name: "Login" });
+    },
   },
-  methods: {},
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.test {
+  cursor: pointer;
+  background-color: black;
+}
 .sidebar {
   border-right: solid 2px white;
   background-color: rgb(36, 36, 36);
   height: 100%;
-  width: 30%;
+  width: 20%;
   display: flex;
+  position: absolute;
+  right: -5px;
   flex-direction: column;
   align-items: center;
 }
@@ -36,5 +50,17 @@ export default {
   color: white;
   font-size: 2.3rem;
   margin-top: 25%;
+}
+
+.show {
+  &-enter-active,
+  &-leave-active {
+    transition: all 700ms;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(80px);
+  }
 }
 </style>

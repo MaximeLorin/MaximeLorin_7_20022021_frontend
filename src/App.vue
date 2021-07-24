@@ -5,7 +5,20 @@
 
   <router-view />
 </template>
-<script></script>
+<script>
+export default {
+  name: "sidebar",
+  data: function() {
+    return {
+      showSideIcon: true,
+    };
+  },
+  props: {
+    msg: String,
+  },
+  methods: { togglenav() {} },
+};
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
@@ -45,6 +58,9 @@ input:focus {
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: rgb(36, 36, 36);
   &__img {
     margin-left: 5%;

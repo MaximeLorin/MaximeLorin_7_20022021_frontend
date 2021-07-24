@@ -66,6 +66,12 @@ const authentication = {
         console.log({ err });
       }
     },
+    disconnect({ commit }) {
+      commit(mutationType.SET_USER_ID, null);
+      commit(mutationType.SET_USER_TOKEN, null);
+      commit(mutationType.IS_USER_CONNECTED, 0);
+      localStorage.removeItem("user");
+    },
   },
 
   getters: {},

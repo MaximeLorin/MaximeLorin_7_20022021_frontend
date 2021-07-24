@@ -49,6 +49,7 @@ export default {
     async connectToApi() {
       let content = { userName: this.userName, password: this.password };
       await this.$store.dispatch("authentication/login", content);
+      await this.$router.replace({ name: "About" });
     },
     reconnectOnRefresh() {
       let connectInfo = JSON.parse(localStorage.getItem("user"));
@@ -63,7 +64,6 @@ export default {
     if (localStorage.getItem("user")) {
       this.reconnectOnRefresh();
     }
-    //localStorage.setItem("user", JSON.stringify(this.$store.state));
   },
 };
 </script>
