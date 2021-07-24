@@ -1,11 +1,8 @@
 <template>
-  <div class="test" @click="disconnect">
-    <fa icon="sign-in-alt" class="sidebar__icon" />
-  </div>
   <transition name="show">
     <div id="sidebar" class="sidebar" v-if="open">
       <fa icon="cog" class="sidebar__icon" />
-      <fa icon="sign-in-alt" class="sidebar__icon" />
+      <fa icon="sign-in-alt" class="sidebar__icon" @click="disconnect" />
     </div>
   </transition>
 </template>
@@ -31,10 +28,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.test {
-  cursor: pointer;
-  background-color: black;
-}
 .sidebar {
   border-right: solid 2px white;
   background-color: rgb(36, 36, 36);
@@ -55,7 +48,7 @@ export default {
 .show {
   &-enter-active,
   &-leave-active {
-    transition: all 700ms;
+    transition: all 600ms;
   }
   &-enter-from,
   &-leave-to {
