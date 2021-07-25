@@ -6,7 +6,6 @@ const mutationType = {
   SET_USER_TOKEN: "SET_USER_TOKEN",
   IS_USER_CONNECTED: "IS_USER_CONNECTED",
 };
-//const IS_USER_CONNECTED = "IS_USER_CONNECTED";
 
 const authentication = {
   namespaced: true,

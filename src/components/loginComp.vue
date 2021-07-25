@@ -49,7 +49,7 @@ export default {
     async connectToApi() {
       let content = { userName: this.userName, password: this.password };
       await this.$store.dispatch("authentication/login", content);
-      await this.$router.replace({ name: "About" });
+      await this.$router.replace({ name: "MainPage" });
     },
     reconnectOnRefresh() {
       let connectInfo = JSON.parse(localStorage.getItem("user"));

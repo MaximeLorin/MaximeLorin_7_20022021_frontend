@@ -53,9 +53,6 @@ textarea {
 input:focus {
   outline: 0;
 }
-#nav {
-  background-color: blue;
-}
 
 .header {
   display: flex;

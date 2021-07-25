@@ -48,7 +48,7 @@ export default {
 .show {
   &-enter-active,
   &-leave-active {
-    transition: all 600ms;
+    transition: all 400ms;
   }
   &-enter-from,
   &-leave-to {
