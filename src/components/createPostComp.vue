@@ -16,14 +16,8 @@ export default {
       showSideIcon: false,
     };
   },
-  props: ["open"],
-  methods: {
-    disconnect() {
-      console.log("click");
-      this.$store.dispatch("authentication/disconnect");
-      this.$router.replace({ name: "Login" });
-    },
-  },
+
+  methods: {},
 };
 </script>
 

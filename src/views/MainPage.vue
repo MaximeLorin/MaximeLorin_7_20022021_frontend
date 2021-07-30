@@ -1,7 +1,10 @@
 <template>
   <createPostComp />
   <postComp />
-  <sidebar :open="navOpen" />
+  <!-- <ul>
+    <li v-for="post in posts">{{ posts.posts }}</li>
+  </ul> -->
+  <sidebar :open="navOpen" class="sidebar" />
   <navComp @togglenav="navOpen = !navOpen" />
 </template>
 <script>
@@ -22,11 +25,13 @@ export default {
   data: function() {
     return {
       navOpen: false,
+      posts: [],
     };
   },
   methods: {
     getAllPosts() {
       this.$store.dispatch("posts/getPosts");
+      this.posts = this.$store.state.posts;
     },
   },
   mounted() {
@@ -35,4 +40,9 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.sidebar {
+  position: absolute;
+  top: 80px;
+}
+</style>

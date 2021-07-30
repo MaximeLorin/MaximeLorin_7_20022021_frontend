@@ -24,7 +24,7 @@ const posts = {
       try {
         const response = await axios.get("http://localhost:3000/api/posts/");
         commit("GET_ALL_POSTS", response.data);
-        console.log(response.data);
+        //console.log(response.data);
       } catch (err) {
         console.log(err);
       }

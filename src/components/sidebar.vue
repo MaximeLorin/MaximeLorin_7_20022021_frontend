@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   border-right: solid 2px white;
-  background-color: rgb(36, 36, 36);
+  background-color: rgba(36, 36, 36, 0.733);
   height: 100%;
   width: 20%;
   display: flex;
