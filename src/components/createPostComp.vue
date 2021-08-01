@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "sidebar",
+  name: "createPostComp",
   data: function() {
     return {
       showSideIcon: false,

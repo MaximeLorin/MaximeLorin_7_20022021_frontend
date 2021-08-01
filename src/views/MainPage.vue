@@ -1,14 +1,13 @@
 <template>
   <createPostComp />
+  <!-- <postComp v-for="post of posts" :key="post.id"  /> -->
   <postComp />
-  <!-- <ul>
-    <li v-for="post in posts">{{ posts.posts }}</li>
-  </ul> -->
   <sidebar :open="navOpen" class="sidebar" />
   <navComp @togglenav="navOpen = !navOpen" />
 </template>
 <script>
 // @ is an alias to /src
+import { mapState } from "vuex";
 import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
 import createPostComp from "@/components/createPostComp.vue";
@@ -25,13 +24,16 @@ export default {
   data: function() {
     return {
       navOpen: false,
-      posts: [],
     };
+  },
+  computed: {
+    ...mapState("posts", {
+      posts: "posts",
+    }),
   },
   methods: {
     getAllPosts() {
       this.$store.dispatch("posts/getPosts");
-      this.posts = this.$store.state.posts;
     },
   },
   mounted() {

@@ -1,27 +1,36 @@
 <template>
-  <div id="post">
-    <form action="post" class="post">
-      <h2 class="post__title"></h2>
-      <img class="post__image" />
-    </form>
+  <div id="post" v-for="post of posts" :key="post.id">
+    <div class="post">
+      <h2 class="post__author">{{ post.author }}</h2>
+      <h3 class="post__title">{{ post.title }}</h3>
+      <img class="post__image" :src="post.imageUrl" />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  name: "sidebar",
+  name: "postComp",
   data: function() {
     return {
       showSideIcon: false,
     };
   },
-  props: ["open"],
+  props: [],
+  computed: {
+    ...mapState("posts", {
+      posts: "posts",
+    }),
+  },
   methods: {
-    disconnect() {
-      console.log("click");
-      this.$store.dispatch("authentication/disconnect");
-      this.$router.replace({ name: "Login" });
+    getAllPosts() {
+      this.$store.dispatch("posts/getPosts");
     },
+  },
+  mounted() {
+    this.getAllPosts();
   },
 };
 </script>
@@ -39,16 +48,23 @@ export default {
   border-bottom-right-radius: 25px;
 }
 .post {
-  &__title {
-    font-size: 0.95rem;
-
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 10%;
+  &__author {
+    margin-top: 3%;
+    color: white;
     border-radius: 17.5px;
     width: 110px;
     height: 25px;
-    border: solid 2px grey;
-    background-color: white;
+  }
+  &__title {
+    margin-top: 3%;
+    color: white;
   }
   &__image {
+    margin-top: 3%;
     font-size: 0.95rem;
     padding-left: 15px;
     padding-right: 20px;

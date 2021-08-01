@@ -31,7 +31,11 @@ const posts = {
     },
   },
 
-  getters: {},
+  getters: {
+    postContent: (state, count) => {
+      return state.posts[count];
+    },
+  },
 };
 
 export default posts;
