@@ -9,7 +9,7 @@ const mutationType = {
 
 const authentication = {
   namespaced: true,
-  state: () => ({ userId: null, token: null, isConnected: 0 }),
+  state: () => ({ userId: null, token: null, isConnected: false }),
 
   mutations: {
     [mutationType.SET_USER_ID](state, userId) {
@@ -23,6 +23,11 @@ const authentication = {
     },
   },
   actions: {
+    reconnect({ commit }, authBack) {
+      commit(mutationType.SET_USER_ID, authBack.userId);
+      commit(mutationType.SET_USER_TOKEN, authBack.token);
+      commit(mutationType.IS_USER_CONNECTED, authBack.isConnected);
+    },
     async signup({ commit }, userAuth) {
       try {
         let content = {
@@ -36,8 +41,11 @@ const authentication = {
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
         if (response.data) {
-          commit(mutationType.IS_USER_CONNECTED, 1);
-          localStorage.setItem("user", JSON.stringify(store.state));
+          commit(mutationType.IS_USER_CONNECTED, true);
+          localStorage.setItem(
+            "user",
+            JSON.stringify(store.state.authentication)
+          );
         }
         console.log(response.data);
       } catch (err) {
@@ -57,10 +65,12 @@ const authentication = {
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
         if (response.data) {
-          commit(mutationType.IS_USER_CONNECTED, 1);
-          localStorage.setItem("user", JSON.stringify(store.state));
+          commit(mutationType.IS_USER_CONNECTED, true);
+          localStorage.setItem(
+            "user",
+            JSON.stringify(store.state.authentication)
+          );
         }
-        console.log(response.data);
       } catch (err) {
         console.log({ err });
       }
@@ -68,7 +78,7 @@ const authentication = {
     disconnect({ commit }) {
       commit(mutationType.SET_USER_ID, null);
       commit(mutationType.SET_USER_TOKEN, null);
-      commit(mutationType.IS_USER_CONNECTED, 0);
+      commit(mutationType.IS_USER_CONNECTED, false);
       localStorage.removeItem("user");
     },
   },

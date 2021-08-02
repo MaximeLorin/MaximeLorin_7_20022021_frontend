@@ -10,7 +10,7 @@ const routes = [
 
     component: MainPage,
     beforeEnter: (to, from, next) => {
-      if (store.state.authentication.isConnected === 0) {
+      if (!store.state.authentication.isConnected) {
         next("/login");
       } else {
         next();

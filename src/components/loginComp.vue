@@ -28,7 +28,7 @@
     <button class="login__button" type="button" @click="connectToApi">
       Connection
     </button>
-    <router-link to="/">S'inscrire</router-link>
+    <router-link to="/signup">S'inscrire</router-link>
   </div>
 </template>
 
@@ -51,19 +51,6 @@ export default {
       await this.$store.dispatch("authentication/login", content);
       await this.$router.replace({ name: "MainPage" });
     },
-    reconnectOnRefresh() {
-      let connectInfo = JSON.parse(localStorage.getItem("user"));
-      console.log(connectInfo);
-
-      if (connectInfo.authentication.isConnected === 1) {
-        this.connectToApi();
-      }
-    },
-  },
-  mounted() {
-    if (localStorage.getItem("user")) {
-      this.reconnectOnRefresh();
-    }
   },
 };
 </script>

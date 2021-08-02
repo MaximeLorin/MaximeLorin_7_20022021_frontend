@@ -12,6 +12,21 @@ export default {
   components: {
     loginComp,
   },
+  methods: {
+    reconnectOnRefresh() {
+      let connectInfo = JSON.parse(localStorage.getItem("user"));
+      console.log(connectInfo);
+      this.$store.dispatch("authentication/reconnect", connectInfo);
+      if (connectInfo.isConnected) {
+        this.$router.replace({ name: "MainPage" });
+      }
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user")) {
+      this.reconnectOnRefresh();
+    }
+  },
 };
 </script>
 
