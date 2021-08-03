@@ -66,11 +66,11 @@ export default {
   &__image {
     margin-top: 3%;
     font-size: 0.95rem;
-    padding-left: 15px;
-    padding-right: 20px;
+
     border-radius: 17.5px;
-    width: 110px;
-    height: 25px;
+    width: 90%;
+    height: 170px;
+    object-fit: cover;
     border: solid 2px grey;
     background-color: white;
   }

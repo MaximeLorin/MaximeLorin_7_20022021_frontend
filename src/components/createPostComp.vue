@@ -2,9 +2,9 @@
   <div id="postCreate">
     <form action="post" class="createPost">
       <h2 class="createPost__author">
-        {{ $store.state.authentication.userId }}
+        {{ $store.state.authentication.userName }}
       </h2>
-      <input type="text" class="createPost__title" v-model="post.title" />
+      <input type="text" class="createPost__title" v-model="title" />
       <input
         type="file"
         accept="image/png, image/jpeg, image/png, image/gif"
@@ -23,11 +23,8 @@ export default {
   name: "createPostComp",
   data: function() {
     return {
-      post: {
-        author: "ccc",
-        title: "",
-      },
-
+      author: this.$store.state.authentication.userName,
+      title: "",
       imageUrl: "",
     };
   },
@@ -38,13 +35,15 @@ export default {
     },
     async newPost() {
       try {
-        const fData = new FormData();
-        fData.append("post", this.post);
+        let fData = new FormData();
         fData.append("imageUrl", this.imageUrl);
+        fData.append("author", this.author);
+        fData.append("title", this.title);
 
         const reponse = await axios.post(
           "http://localhost:3000/api/posts/",
-          fData
+          fData,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
         console.log(reponse);
       } catch (err) {
@@ -72,6 +71,9 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 20px;
+  &__author {
+    color: white;
+  }
   &__title {
     font-size: 0.95rem;
     padding-left: 15px;
@@ -87,7 +89,7 @@ export default {
     padding-left: 15px;
     padding-right: 20px;
     border-radius: 17.5px;
-    width: 110px;
+    width: 90%;
     height: 25px;
     border: solid 2px grey;
     background-color: white;

@@ -4,12 +4,18 @@ import store from "..";
 const mutationType = {
   SET_USER_ID: "SET_USER_ID",
   SET_USER_TOKEN: "SET_USER_TOKEN",
+  SET_USER_NAME: "SET_USER_NAME",
   IS_USER_CONNECTED: "IS_USER_CONNECTED",
 };
 
 const authentication = {
   namespaced: true,
-  state: () => ({ userId: null, token: null, isConnected: false }),
+  state: () => ({
+    userId: null,
+    token: null,
+    isConnected: false,
+    userName: null,
+  }),
 
   mutations: {
     [mutationType.SET_USER_ID](state, userId) {
@@ -21,12 +27,26 @@ const authentication = {
     [mutationType.IS_USER_CONNECTED](state, increment) {
       state.isConnected = increment;
     },
+    [mutationType.SET_USER_NAME](state, userName) {
+      state.userName = userName;
+    },
   },
   actions: {
     reconnect({ commit }, authBack) {
       commit(mutationType.SET_USER_ID, authBack.userId);
       commit(mutationType.SET_USER_TOKEN, authBack.token);
       commit(mutationType.IS_USER_CONNECTED, authBack.isConnected);
+    },
+    async setUserName({ commit }, userId) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/byid",
+          userId
+        );
+        commit(mutationType.SET_USER_NAME, response.data);
+      } catch (err) {
+        console.log(err);
+      }
     },
     async signup({ commit }, userAuth) {
       try {

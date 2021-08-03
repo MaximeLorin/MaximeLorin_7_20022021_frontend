@@ -35,9 +35,16 @@ export default {
     getAllPosts() {
       this.$store.dispatch("posts/getPosts");
     },
+    getNameById() {
+      const userId = {
+        userId: this.$store.state.authentication.userId,
+      };
+      this.$store.dispatch("authentication/setUserName", userId);
+    },
   },
   mounted() {
     this.getAllPosts();
+    this.getNameById();
   },
 };
 </script>
