@@ -1,6 +1,5 @@
 <template>
   <createPostComp />
-  <!-- <postComp v-for="post of posts" :key="post.id"  /> -->
   <postComp />
   <sidebar :open="navOpen" class="sidebar" />
   <navComp @togglenav="navOpen = !navOpen" />

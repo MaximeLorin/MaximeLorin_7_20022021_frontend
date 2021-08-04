@@ -1,6 +1,8 @@
 <template>
   <header id="header" class="header">
-    <img class="header__img" src="./assets/iconNB.png" alt="logo groupomania" />
+    <router-link to="/"
+      ><img class="header__img" src="./assets/iconNB.png" alt="logo groupomania"
+    /></router-link>
   </header>
 
   <router-view />

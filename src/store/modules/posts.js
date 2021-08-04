@@ -2,6 +2,7 @@ import axios from "axios";
 //import store from "..";
 
 const allPosts = { GET_ALL_POSTS: "GET_ALL_POSTS" };
+const onePost = { GET_ONE_POST: "GET_ONE_POST" };
 
 // const mutationType = {
 
@@ -12,11 +13,14 @@ const allPosts = { GET_ALL_POSTS: "GET_ALL_POSTS" };
 
 const posts = {
   namespaced: true,
-  state: () => ({ posts: [] }),
+  state: () => ({ posts: [], post: "" }),
 
   mutations: {
     [allPosts.GET_ALL_POSTS](state, posts) {
       state.posts = posts;
+    },
+    [onePost.GET_ONE_POST](state, post) {
+      state.post = post;
     },
   },
   actions: {
@@ -28,6 +32,12 @@ const posts = {
       } catch (err) {
         console.log(err);
       }
+    },
+    async getOnePost({ commit }, idPost) {
+      const reponse = await axios.get(
+        `http://localhost:3000/api/posts/${idPost}`
+      );
+      commit("GET_ONE_POST", reponse.data);
     },
   },
 
