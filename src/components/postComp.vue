@@ -1,5 +1,5 @@
 <template>
-  <div id="post" v-for="post of posts.slice().reverse()" :key="post.id">
+  <div id="post" v-for="post of posts" :key="post.id">
     <div class="post">
       <h2 class="post__author">{{ post.author }}</h2>
       <h3 class="post__title">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "postComp",
@@ -24,7 +24,7 @@ export default {
   },
   props: [],
   computed: {
-    ...mapState("posts", {
+    ...mapGetters("posts", {
       posts: "posts",
     }),
   },

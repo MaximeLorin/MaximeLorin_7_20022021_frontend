@@ -13,22 +13,26 @@ const comments = {
     },
   },
   actions: {
-    async getComments({ commit }, post) {
+    async getComments({ commit }, comment) {
       try {
-        const postId = post;
+        console.log(comment);
         const response = await axios.get(
           "http://localhost:3000/api/comment/",
-          postId
+          comment
         );
+        console.log(response);
         commit("GET_ALL_COMMENTS", response.data);
-        //console.log(response.data);
       } catch (err) {
         console.log(err);
       }
     },
   },
 
-  getters: {},
+  getters: {
+    comments: (state) => {
+      return [...state.comments].reverse();
+    },
+  },
 };
 
 export default comments;

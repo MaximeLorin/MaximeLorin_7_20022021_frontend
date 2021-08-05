@@ -1,26 +1,28 @@
 import axios from "axios";
 //import store from "..";
 
-const allPosts = { GET_ALL_POSTS: "GET_ALL_POSTS" };
-const onePost = { GET_ONE_POST: "GET_ONE_POST" };
+// const allPosts = {  };
+// const onePost = {  };
 
-// const mutationType = {
-
-//   SET_POST_AUTHOR: "SET_POST_AUTHOR",
-//   SET_USER_TITLE: "SET_USER_TITLE",
-//   SET_POST_IMAGE: "SET_POST_IMAGE",
-// };
+const POST_MUTATION_TYPE = {
+  GET_ALL_POSTS: "GET_ALL_POSTS",
+  GET_ONE_POST: "GET_ONE_POST",
+  CREATE_POST: "CREATE_POST",
+};
 
 const posts = {
   namespaced: true,
   state: () => ({ posts: [], post: "" }),
 
   mutations: {
-    [allPosts.GET_ALL_POSTS](state, posts) {
+    [POST_MUTATION_TYPE.GET_ALL_POSTS](state, posts) {
       state.posts = posts;
     },
-    [onePost.GET_ONE_POST](state, post) {
+    [POST_MUTATION_TYPE.GET_ONE_POST](state, post) {
       state.post = post;
+    },
+    [POST_MUTATION_TYPE.CREATE_POST](state, post) {
+      state.posts = state.posts.concat(post);
     },
   },
   actions: {
@@ -39,11 +41,32 @@ const posts = {
       );
       commit("GET_ONE_POST", reponse.data);
     },
+    async createPost({ commit }, post) {
+      try {
+        let fData = new FormData();
+        fData.append("imageUrl", post.imageUrl);
+        fData.append("author", post.author);
+        fData.append("title", post.title);
+
+        const response = await axios.post(
+          "http://localhost:3000/api/posts/",
+          fData,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        console.log(response);
+        commit(POST_MUTATION_TYPE.CREATE_POST, response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 
   getters: {
-    postContent: (state, count) => {
-      return state.posts[count];
+    posts: (state) => {
+      return [...state.posts].reverse();
+    },
+    post: (state) => {
+      return { ...state.post };
     },
   },
 };

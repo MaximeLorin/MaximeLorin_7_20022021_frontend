@@ -2,31 +2,36 @@
   <div id="comment">
     <div class="commentBox">
       <h3 class="commentBox__Author"></h3>
-      <p class="commentBox__Content"></p>
+      <p class="commentBox__Content">{{ post }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "createComment",
   data: function() {
     return {};
   },
-  props: ["id"],
+  props: [],
   computed: {
-    ...mapState("comments", {
+    ...mapState("comment", {
       comments: "comments",
+    }),
+    ...mapGetters("posts", {
+      post: "post",
     }),
   },
   methods: {
     getComments() {
-      this.$store.dispatch("comment/getComments", this.id);
+      const postId = { postId: this.post.id };
+      console.log(postId);
+      this.$store.dispatch("comment/getComments", postId);
     },
   },
-  mounted() {
+  updated() {
     this.getComments();
   },
 };

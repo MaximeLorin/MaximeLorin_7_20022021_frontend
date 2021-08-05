@@ -103,7 +103,11 @@ const authentication = {
     },
   },
 
-  getters: {},
+  getters: {
+    userName: (state) => {
+      return state.userName;
+    },
+  },
 };
 
 export default authentication;

@@ -1,8 +1,8 @@
 <template>
   <div id="postCreate">
-    <form action="post" class="createPost">
+    <form class="createPost">
       <h2 class="createPost__author">
-        {{ $store.state.authentication.userName }}
+        {{ userName }}
       </h2>
       <input type="text" class="createPost__title" v-model="title" />
       <input
@@ -17,38 +17,31 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
   name: "createPostComp",
   data: function() {
     return {
-      author: this.$store.state.authentication.userName,
       title: "",
       imageUrl: "",
     };
   },
-
+  computed: {
+    ...mapGetters("authentication", {
+      userName: "userName",
+    }),
+  },
   methods: {
     onFileSelected(event) {
       this.imageUrl = event.target.files[0];
     },
     async newPost() {
-      try {
-        let fData = new FormData();
-        fData.append("imageUrl", this.imageUrl);
-        fData.append("author", this.author);
-        fData.append("title", this.title);
-
-        const reponse = await axios.post(
-          "http://localhost:3000/api/posts/",
-          fData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        console.log(reponse);
-      } catch (err) {
-        console.log(err);
-      }
+      this.$store.dispatch("posts/createPost", {
+        author: this.userName,
+        title: this.title,
+        imageUrl: this.imageUrl,
+      });
     },
   },
 };
