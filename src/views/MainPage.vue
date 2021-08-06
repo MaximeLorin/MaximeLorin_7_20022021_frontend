@@ -31,9 +31,9 @@ export default {
     }),
   },
   methods: {
-    getAllPosts() {
-      this.$store.dispatch("posts/getPosts");
-    },
+    // getAllPosts() {
+    //   this.$store.dispatch("posts/getPosts");
+    // },
     getNameById() {
       const userId = {
         userId: this.$store.state.authentication.userId,
@@ -42,7 +42,7 @@ export default {
     },
   },
   mounted() {
-    this.getAllPosts();
+    //this.getAllPosts();
     this.getNameById();
   },
 };

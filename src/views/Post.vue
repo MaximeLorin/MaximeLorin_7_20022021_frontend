@@ -3,6 +3,7 @@
   <navComp @togglenav="navOpen = !navOpen" />
   <onePostComp />
   <createComment />
+  <commentComp />
 </template>
 <script>
 // @ is an alias to /src
@@ -11,6 +12,7 @@ import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
 import onePostComp from "@/components/onePostComp.vue";
 import createComment from "@/components/createComment.vue";
+import commentComp from "@/components/commentComp.vue";
 
 export default {
   name: "Post",
@@ -19,6 +21,7 @@ export default {
     navComp,
     onePostComp,
     createComment,
+    commentComp,
   },
   props: ["id"],
   data: function() {

@@ -1,5 +1,4 @@
 import axios from "axios";
-//import store from "..";
 
 const allComments = { GET_ALL_COMMENTS: "GET_ALL_COMMENTS" };
 
@@ -9,18 +8,16 @@ const comments = {
 
   mutations: {
     [allComments.GET_ALL_COMMENTS](state, comments) {
-      state.comments = comments;
+      state.comments = state.comments.concat(comments);
     },
   },
   actions: {
-    async getComments({ commit }, comment) {
+    async getComments({ commit }, postId) {
       try {
-        console.log(comment);
         const response = await axios.get(
-          "http://localhost:3000/api/comment/",
-          comment
+          `http://localhost:3000/api/comment?postId=${postId}`
         );
-        console.log(response);
+
         commit("GET_ALL_COMMENTS", response.data);
       } catch (err) {
         console.log(err);
