@@ -2,35 +2,43 @@
   <div id="createComment" class="createComment">
     <h3 class="createComment__author">{{ post.author }}</h3>
     <form class="createComment__form">
-      <input type="text" class="createComment__form--content" />
-      <button class="createComment__form--button"></button>
+      <input
+        type="text"
+        class="createComment__form--content"
+        placeholder="Votre commentaire..."
+        v-model="content"
+      />
+      <button class="createComment__form--button" @click="newComment">
+        <fa icon="comment" />
+      </button>
     </form>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "createComment",
   data: function() {
-    return {};
+    return { author: "", content: "" };
   },
   props: [],
   computed: {
-    ...mapState("comment", {
-      comments: "comments",
-    }),
     ...mapGetters("posts", {
       post: "post",
     }),
   },
   methods: {
-    // getComments() {
-    //   const postId = { postId: this.post.id };
-    //   console.log(postId);
-    //   this.$store.dispatch("comment/getComments", postId);
-    // },
+    async newComment() {
+      const commentBody = {
+        author: this.post.author,
+        content: this.content,
+        postId: this.post.id,
+      };
+      ///console.log(commentBody);
+      this.$store.dispatch("posts/createComment", commentBody);
+    },
   },
   updated() {
     // this.getComments();
@@ -41,26 +49,42 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .createComment {
-  background-color: grey;
-  width: 85%;
-  height: 80px;
-  margin: 2.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(36, 36, 36);
+  width: 90%;
+  height: 65px;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: -20px;
+  border-bottom-right-radius: 15px;
+  border-top: solid 1px rgb(119, 119, 119);
+  &__author {
+    margin-left: 20px;
+    color: white;
+  }
+  &__form {
+    margin-right: 20px;
+  }
 }
+
 .createComment__form--content {
   font-size: 0.95rem;
   padding-left: 15px;
   padding-right: 20px;
   border-radius: 17.5px;
-  width: 110px;
+  width: 150px;
   height: 25px;
+  margin-right: 15px;
   border: solid 2px grey;
   background-color: white;
 }
 .createComment__form--button {
-  font-weight: bold;
   border-radius: 17.5px;
-  width: 90px;
+  width: 35px;
   height: 35px;
+  font-size: 1.5rem;
   background-color: white;
   &:hover {
     background-color: grey;

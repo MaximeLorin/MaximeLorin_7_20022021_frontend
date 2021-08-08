@@ -34,7 +34,8 @@ export default {
   height: 100%;
   width: 20%;
   display: flex;
-  position: absolute;
+  position: fixed;
+  top: 10vh;
   right: -5px;
   flex-direction: column;
   align-items: center;

@@ -18,7 +18,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .bars {
-  position: absolute;
+  position: fixed;
   top: 23px;
   right: 0;
   cursor: pointer;

@@ -1,8 +1,10 @@
 <template>
-  <createPostComp />
-  <postComp />
-  <sidebar :open="navOpen" class="sidebar" />
-  <navComp @togglenav="navOpen = !navOpen" />
+  <div id="main">
+    <createPostComp class="createComp" />
+    <postComp />
+    <sidebar :open="navOpen" class="sidebar" />
+    <navComp @togglenav="navOpen = !navOpen" />
+  </div>
 </template>
 <script>
 // @ is an alias to /src
@@ -49,8 +51,8 @@ export default {
 </script>
 
 <style lang="scss">
-.sidebar {
-  position: absolute;
-  top: 80px;
+#main {
+  // height: 100vh;
+  padding-top: 11vh;
 }
 </style>

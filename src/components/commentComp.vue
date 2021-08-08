@@ -1,6 +1,6 @@
 <template>
   <div id="commentBox" class="commentBox">
-    <div class="comment" v-for="comment of comments" :key="comment.id">
+    <div class="comment" v-for="comment of post.Comments" :key="comment.id">
       <h3 class="comment__author">{{ comment.author }}</h3>
       <p class="comment__content">{{ comment.content }}</p>
     </div>
@@ -24,25 +24,30 @@ export default {
       post: "post",
     }),
   },
-  methods: {
-    async getComments() {
-      const postId = localStorage.getItem("postId");
-      console.log(postId);
-      this.$store.dispatch("comment/getComments", postId);
-    },
-  },
-  mounted() {
-    this.getComments();
-  },
+  methods: {},
+  mounted() {},
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .comment {
-  background-color: grey;
-  width: 85%;
-  height: 80px;
-  margin: 2.5%;
+  color: white;
+  background-color: rgb(36, 36, 36);
+  width: 90%;
+  height: 75px;
+  margin-right: 5%;
+  margin-left: 5%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top: solid 1px rgb(119, 119, 119);
+  &__author {
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+  &__content {
+    margin-left: 20px;
+    margin-top: 5px;
+  }
 }
 </style>

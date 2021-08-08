@@ -1,9 +1,11 @@
 <template>
-  <sidebar :open="navOpen" class="sidebar" />
-  <navComp @togglenav="navOpen = !navOpen" />
-  <onePostComp />
-  <createComment />
-  <commentComp />
+  <div id="onePost">
+    <sidebar :open="navOpen" class="sidebar" />
+    <navComp @togglenav="navOpen = !navOpen" />
+    <onePostComp />
+    <createComment class="createComment" />
+    <commentComp />
+  </div>
 </template>
 <script>
 // @ is an alias to /src
@@ -31,26 +33,19 @@ export default {
   },
   computed: {},
   methods: {
-    // getNameById() {
-    //   const userId = {
-    //     userId: this.$store.state.authentication.userId,
-    //   };
-    //   this.$store.dispatch("authentication/setUserName", userId);
-    // },
     getOnePost() {
       this.$store.dispatch("posts/getOnePost", this.id);
     },
   },
   mounted() {
-    // this.getNameById();
     this.getOnePost();
   },
 };
 </script>
 
 <style lang="scss">
-.sidebar {
-  position: absolute;
-  top: 80px;
+#onePost {
+  height: 89vh;
+  padding-top: 11vh;
 }
 </style>
