@@ -4,6 +4,7 @@
     <postComp />
     <sidebar :open="navOpen" class="sidebar" />
     <navComp @togglenav="navOpen = !navOpen" />
+    <!-- <footerComp class="footerComp" /> -->
   </div>
 </template>
 <script>
@@ -13,6 +14,7 @@ import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
 import createPostComp from "@/components/createPostComp.vue";
 import postComp from "@/components/postComp.vue";
+// import footerComp from "@/components/footerComp.vue";
 
 export default {
   name: "MainPage",
@@ -21,6 +23,7 @@ export default {
     navComp,
     createPostComp,
     postComp,
+    // footerComp,
   },
   data: function() {
     return {
@@ -52,7 +55,8 @@ export default {
 
 <style lang="scss">
 #main {
-  // height: 100vh;
+  min-height: 89vh;
   padding-top: 11vh;
+  background-color: rgb(119, 119, 119);
 }
 </style>

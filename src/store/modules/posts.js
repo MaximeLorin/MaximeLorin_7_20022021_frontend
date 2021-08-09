@@ -11,7 +11,10 @@ const POST_MUTATION_TYPE = {
 
 const posts = {
   namespaced: true,
-  state: () => ({ posts: [], post: { Comments: [] } }),
+  state: () => ({
+    posts: [{ post: { Comments: [] } }],
+    post: { Comments: [] },
+  }),
 
   mutations: {
     [POST_MUTATION_TYPE.GET_ALL_POSTS](state, posts) {
@@ -83,7 +86,7 @@ const posts = {
         });
         commit("GET_ALL_POSTS", response.data);
 
-        //console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.log(err);
       }

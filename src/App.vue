@@ -4,12 +4,13 @@
       ><img class="header__img" src="./assets/iconNB.png" alt="logo groupomania"
     /></router-link>
   </header>
-  <!-- <footer id="footer"><p>@ 2021 Maxime Lorin</p></footer> -->
+
   <router-view />
 </template>
 <script>
 export default {
   name: "sidebar",
+  components: {},
   data: function() {
     return {
       showSideIcon: true,
@@ -25,7 +26,6 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 #app {
-  height: 100vh;
   background-color: rgb(119, 119, 119);
 }
 * {
@@ -62,6 +62,7 @@ input:focus {
 }
 
 .header {
+  z-index: 200;
   display: flex;
   position: fixed;
   top: 0px;
@@ -75,16 +76,5 @@ input:focus {
     object-fit: cover;
     width: 220px;
   }
-}
-#footer {
-  height: 10vh;
-  width: 100%;
-  background-color: rgb(36, 36, 36);
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  color: white;
-  align-items: center;
-  justify-content: center;
 }
 </style>

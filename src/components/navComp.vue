@@ -18,8 +18,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .bars {
+  z-index: 300;
   position: fixed;
-  top: 23px;
+  top: 2.5vh;
   right: 0;
   cursor: pointer;
   color: white;

@@ -13,16 +13,31 @@ export default {
   components: {
     signupComp,
   },
+  methods: {
+    reconnectOnRefresh() {
+      let connectInfo = JSON.parse(localStorage.getItem("user"));
+      console.log(connectInfo);
+      this.$store.dispatch("authentication/reconnect", connectInfo);
+      if (connectInfo.isConnected) {
+        this.$router.replace({ name: "MainPage" });
+      }
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user")) {
+      this.reconnectOnRefresh();
+    }
+  },
 };
 </script>
 
 <style lang="scss">
 #signup {
-  height: 100%;
+  height: 100vh;
+  background-color: rgb(119, 119, 119);
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(238, 238, 238);
 }
 </style>

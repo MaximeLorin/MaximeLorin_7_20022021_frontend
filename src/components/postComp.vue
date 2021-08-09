@@ -1,20 +1,42 @@
 <template>
   <div id="post" v-for="post of posts" :key="post.id">
     <div class="post">
-      <button
-        @click="deleteOnePost(post.id)"
-        v-if="userName === post.author"
-        class="post__delete"
-      >
-        <fa icon="times" class="delete" />
-      </button>
-      <h2 class="post__author">{{ post.author }}</h2>
+      <h2 class="post__author">
+        {{ post.author }}
+        <button
+          @click="deleteOnePost(post.id)"
+          v-if="userName === post.author"
+          class="post__delete"
+        >
+          <fa icon="times" class="delete" />
+        </button>
+      </h2>
       <h3 class="post__title">
         <router-link :to="{ name: 'Post', params: { id: post.id } }">{{
           post.title
         }}</router-link>
       </h3>
       <img class="post__image" :src="post.imageUrl" />
+      <div id="createComment" class="createComment">
+        <h3 class="createComment__author">{{ post.author }}</h3>
+        <form class="createComment__form">
+          <input
+            type="text"
+            class="createComment__form--content"
+            placeholder="Votre commentaire..."
+            v-model="content"
+          />
+          <button class="createComment__form--button" @click="newComment">
+            <fa icon="comment" />
+          </button>
+        </form>
+      </div>
+      <div id="commentBox" class="commentBox">
+        <div class="comment" v-for="comment of post.Comments" :key="comment.id">
+          <h3 class="comment__author">{{ comment.author }}</h3>
+          <p class="comment__content">{{ comment.content }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,15 +46,20 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "postComp",
+  components: {},
   data: function() {
     return {
       showSideIcon: false,
+      content: "",
     };
   },
   props: ["id"],
   computed: {
     ...mapGetters("posts", {
       posts: "posts",
+    }),
+    ...mapGetters("comment", {
+      comments: "comments",
     }),
     ...mapGetters("posts", {
       post: "post",
@@ -48,6 +75,15 @@ export default {
     getAllPosts() {
       this.$store.dispatch("posts/getPosts");
     },
+    async newComment() {
+      const commentBody = {
+        author: this.post.author,
+        content: this.content,
+        postId: this.post.id,
+      };
+      ///console.log(commentBody);
+      this.$store.dispatch("posts/createComment", commentBody);
+    },
   },
   mounted() {
     this.getAllPosts();
@@ -60,13 +96,18 @@ export default {
 #post {
   background-color: rgb(36, 36, 36);
   width: 90%;
-  height: 320px;
+  height: 350px;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 10px;
+  margin-top: 5px;
+  // margin-bottom: 5px;
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  overflow: hidden;
+  // overflow: hidden;
+}
+.createComment {
+  width: 100%;
+  margin-left: 0;
 }
 .delete {
   color: white;
@@ -76,24 +117,27 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  margin-bottom: 22px;
   &__delete {
     width: 20px;
-    position: relative;
-    top: 3%;
-    left: 93%;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__author {
-    margin-top: -10px;
-
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
     margin-left: 25px;
+    margin-right: 10px;
     color: white;
     border-radius: 17.5px;
-    width: 110px;
+
     height: 25px;
   }
   &__title {
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 25px;
     color: white;
   }
@@ -105,6 +149,71 @@ export default {
     object-fit: cover;
 
     background-color: white;
+  }
+  .delete {
+    color: rgb(110, 110, 110);
+    padding-right: 20px;
+  }
+  .createComment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(36, 36, 36);
+    width: 100%;
+    height: 55px;
+
+    border-bottom-right-radius: 15px;
+    border-top: solid 1px rgb(119, 119, 119);
+    &__author {
+      margin-left: 20px;
+      color: white;
+    }
+    &__form {
+      margin-right: 20px;
+    }
+  }
+
+  .createComment__form--content {
+    font-size: 0.95rem;
+    padding-left: 15px;
+    padding-right: 20px;
+    border-radius: 17.5px;
+    width: 150px;
+    height: 25px;
+    margin-right: 15px;
+    border: solid 2px grey;
+    background-color: white;
+  }
+  .createComment__form--button {
+    border-radius: 17.5px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+    background-color: white;
+    &:hover {
+      background-color: grey;
+      color: white;
+      transition-duration: 0.5s;
+      cursor: pointer;
+    }
+  }
+  .comment {
+    color: white;
+    background-color: rgb(36, 36, 36);
+    width: 100%;
+    height: 75px;
+
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top: solid 1px rgb(119, 119, 119);
+    &__author {
+      margin-left: 20px;
+      margin-top: 5px;
+    }
+    &__content {
+      margin-left: 20px;
+      margin-top: 5px;
+    }
   }
 }
 </style>

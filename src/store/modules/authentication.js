@@ -5,12 +5,14 @@ const mutationType = {
   SET_USER_ID: "SET_USER_ID",
   SET_USER_TOKEN: "SET_USER_TOKEN",
   SET_USER_NAME: "SET_USER_NAME",
+  SET_USER_IMAGE: "SET_USER_IMAGE",
   IS_USER_CONNECTED: "IS_USER_CONNECTED",
 };
 
 const authentication = {
   namespaced: true,
   state: () => ({
+    imageUrl: null,
     userId: null,
     token: null,
     isConnected: false,
@@ -20,6 +22,9 @@ const authentication = {
   mutations: {
     [mutationType.SET_USER_ID](state, userId) {
       state.userId = userId;
+    },
+    [mutationType.SET_USER_IMAGE](state, imageUrl) {
+      state.imageUrl = imageUrl;
     },
     [mutationType.SET_USER_TOKEN](state, token) {
       state.token = token;
@@ -36,6 +41,7 @@ const authentication = {
       commit(mutationType.SET_USER_ID, authBack.userId);
       commit(mutationType.SET_USER_TOKEN, authBack.token);
       commit(mutationType.IS_USER_CONNECTED, authBack.isConnected);
+      commit(mutationType.SET_USER_IMAGE, authBack.imageUrl);
     },
     async setUserName({ commit }, userId) {
       try {
@@ -50,16 +56,24 @@ const authentication = {
     },
     async signup({ commit }, userAuth) {
       try {
-        let content = {
-          userName: userAuth.userName,
-          password: userAuth.password,
-        };
+        let fData = new FormData();
+        fData.append("userName", userAuth.userName);
+        fData.append("password", userAuth.password);
+        fData.append("imageUrl", userAuth.imageUrl);
+        console.log(fData);
         const response = await axios.post(
           "http://localhost:3000/api/auth/signup/",
-          content
+          fData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              // Authorization: `Bearer ${auth.token}`,
+            },
+          }
         );
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
+        commit(mutationType.SET_USER_IMAGE, response.data.imageUrl);
         if (response.data) {
           commit(mutationType.IS_USER_CONNECTED, true);
           localStorage.setItem(
@@ -84,6 +98,7 @@ const authentication = {
         );
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
+        commit(mutationType.SET_USER_IMAGE, response.data.imageUrl);
         if (response.data) {
           commit(mutationType.IS_USER_CONNECTED, true);
           localStorage.setItem(
@@ -106,6 +121,9 @@ const authentication = {
   getters: {
     userName: (state) => {
       return state.userName;
+    },
+    userPic: (state) => {
+      return state.imageUrl;
     },
   },
 };

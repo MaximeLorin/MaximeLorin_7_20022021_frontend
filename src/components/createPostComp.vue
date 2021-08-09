@@ -1,7 +1,7 @@
 <template>
   <div id="postCreate">
     <div class="profil">
-      <img src="" alt="" class="profil__profPic" />
+      <img :src="userPic" alt="" class="profil__profPic" />
       <h2 class="profil__author">
         {{ userName }}
       </h2>
@@ -58,6 +58,9 @@ export default {
   computed: {
     ...mapGetters("authentication", {
       userName: "userName",
+    }),
+    ...mapGetters("authentication", {
+      userPic: "userPic",
     }),
   },
   methods: {
@@ -118,6 +121,7 @@ export default {
     border-radius: 100%;
     margin-right: 10px;
     margin-top: 10px;
+    object-fit: cover;
   }
 }
 
