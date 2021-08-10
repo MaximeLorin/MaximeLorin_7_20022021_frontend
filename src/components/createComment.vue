@@ -1,6 +1,6 @@
 <template>
   <div id="createComment" class="createComment">
-    <h3 class="createComment__author">{{ post.author }}</h3>
+    <h3 class="createComment__author">{{ userName }}</h3>
     <form class="createComment__form">
       <input
         type="text"
@@ -28,16 +28,22 @@ export default {
     ...mapGetters("posts", {
       post: "post",
     }),
+    ...mapGetters("authentication", {
+      userName: "userName",
+    }),
   },
   methods: {
     async newComment() {
-      const commentBody = {
-        author: this.post.author,
-        content: this.content,
-        postId: this.post.id,
-      };
-      ///console.log(commentBody);
-      this.$store.dispatch("posts/createComment", commentBody);
+      if (this.content) {
+        const commentBody = {
+          author: this.userName,
+          content: this.content,
+          postId: this.post.id,
+        };
+        ///console.log(commentBody);
+        this.$store.dispatch("posts/createComment", commentBody);
+        this.content = "";
+      }
     },
   },
   updated() {

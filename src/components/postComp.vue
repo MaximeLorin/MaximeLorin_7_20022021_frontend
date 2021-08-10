@@ -18,7 +18,7 @@
       </h3>
       <img class="post__image" :src="post.imageUrl" />
       <div id="createComment" class="createComment">
-        <h3 class="createComment__author">{{ post.author }}</h3>
+        <h3 class="createComment__author">{{ userName }}</h3>
         <form class="createComment__form">
           <input
             type="text"
@@ -26,7 +26,10 @@
             placeholder="Votre commentaire..."
             v-model="content"
           />
-          <button class="createComment__form--button" @click="newComment">
+          <button
+            class="createComment__form--button"
+            @click="newComment(post.id)"
+          >
             <fa icon="comment" />
           </button>
         </form>
@@ -50,6 +53,7 @@ export default {
   data: function() {
     return {
       showSideIcon: false,
+
       content: "",
     };
   },
@@ -75,14 +79,17 @@ export default {
     getAllPosts() {
       this.$store.dispatch("posts/getPosts");
     },
-    async newComment() {
-      const commentBody = {
-        author: this.post.author,
-        content: this.content,
-        postId: this.post.id,
-      };
-      ///console.log(commentBody);
-      this.$store.dispatch("posts/createComment", commentBody);
+    async newComment(id) {
+      if (this.content) {
+        const commentBody = {
+          author: this.userName,
+          content: this.content,
+          postId: id,
+        };
+        ///console.log(commentBody);
+        this.$store.dispatch("posts/createComment", commentBody);
+        this.content = "";
+      }
     },
   },
   mounted() {
@@ -197,12 +204,16 @@ export default {
       cursor: pointer;
     }
   }
+  .commentBox {
+    position: relative;
+    top: 15px;
+  }
   .comment {
     color: white;
     background-color: rgb(36, 36, 36);
     width: 100%;
     height: 75px;
-
+    position: relative;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top: solid 1px rgb(119, 119, 119);

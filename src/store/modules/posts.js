@@ -7,6 +7,7 @@ const POST_MUTATION_TYPE = {
   GET_ONE_POST: "GET_ONE_POST",
   CREATE_POST: "CREATE_POST",
   CREATE_COMMENT: "CREATE_COMMENT",
+  CREATE_COMMENTS: "CREATE_COMMENTS",
 };
 
 const posts = {
@@ -29,6 +30,9 @@ const posts = {
     [POST_MUTATION_TYPE.CREATE_COMMENT](state, comment) {
       state.post.Comments = state.post.Comments.concat(comment);
     },
+    [POST_MUTATION_TYPE.CREATE_COMMENTS](state, comment) {
+      state.posts = state.posts.concat(comment);
+    },
   },
   actions: {
     async deletePost({ commit }, idPost) {
@@ -43,7 +47,7 @@ const posts = {
           (post) => post.id !== idPost
         );
         console.log(postList);
-        // const postList = this.state.posts.filter((post) => post.id !== idPost);
+
         commit(POST_MUTATION_TYPE.GET_ALL_POSTS, postList);
       } catch (err) {
         console.log(err);
@@ -59,7 +63,7 @@ const posts = {
           postId: comment.postId,
         };
 
-        const response = await axios.post(
+        const response1 = await axios.post(
           "http://localhost:3000/api/comment/",
           toSend,
           {
@@ -68,7 +72,15 @@ const posts = {
             },
           }
         );
-        commit("CREATE_COMMENT", response.data);
+        console.log(response1);
+        const response = await axios.get("http://localhost:3000/api/posts/", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ` + auth.token,
+          },
+        });
+
+        commit("GET_ALL_POSTS", response.data);
       } catch (err) {
         console.log(err);
       }
@@ -137,6 +149,9 @@ const posts = {
     },
     post: (state) => {
       return { ...state.post };
+    },
+    comments: (state) => {
+      return [...state.post.Comments].reverse();
     },
   },
 };

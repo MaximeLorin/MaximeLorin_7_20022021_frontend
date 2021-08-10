@@ -1,6 +1,6 @@
 <template>
   <div id="commentBox" class="commentBox">
-    <div class="comment" v-for="comment of post.Comments" :key="comment.id">
+    <div class="comment" v-for="comment of comments" :key="comment.id">
       <h3 class="comment__author">{{ comment.author }}</h3>
       <p class="comment__content">{{ comment.content }}</p>
     </div>
@@ -22,6 +22,9 @@ export default {
     }),
     ...mapGetters("posts", {
       post: "post",
+    }),
+    ...mapGetters("posts", {
+      comments: "comments",
     }),
   },
   methods: {},

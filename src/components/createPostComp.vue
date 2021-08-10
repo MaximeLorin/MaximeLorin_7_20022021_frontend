@@ -79,6 +79,8 @@ export default {
           title: this.title,
           imageUrl: this.imageUrl,
         });
+        this.title = "";
+        this.imageUrl = "";
       }
     },
   },
