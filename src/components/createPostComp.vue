@@ -60,6 +60,9 @@ export default {
       userName: "userName",
     }),
     ...mapGetters("authentication", {
+      userId: "userId",
+    }),
+    ...mapGetters("authentication", {
       userPic: "userPic",
     }),
   },
@@ -78,6 +81,7 @@ export default {
           author: this.userName,
           title: this.title,
           imageUrl: this.imageUrl,
+          UserUuid: this.userId,
         });
         this.title = "";
         this.imageUrl = "";
@@ -151,16 +155,6 @@ export default {
     overflow: hidden;
     position: absolute;
     z-index: -1;
-
-    // margin-bottom: 5px;
-    // font-size: 0.95rem;
-    // padding-left: 15px;
-    // padding-right: 20px;
-    // border-radius: 17.5px;
-    // width: 90%;
-    // height: 25px;
-    // border: solid 2px grey;
-    // background-color: white;
   }
   &__btn {
     font-weight: bold;
