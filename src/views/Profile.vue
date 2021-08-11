@@ -1,10 +1,9 @@
 <template>
-  <div id="onePost">
+  <div id="profile">
     <sidebar :open="navOpen" class="sidebar" />
     <navComp @togglenav="navOpen = !navOpen" />
-    <onePostComp />
-    <createComment class="createComment" />
-    <commentComp />
+
+    <profilComp />
   </div>
 </template>
 <script>
@@ -12,18 +11,13 @@
 
 import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
-import onePostComp from "@/components/onePostComp.vue";
-import createComment from "@/components/createComment.vue";
-import commentComp from "@/components/commentComp.vue";
-
+import profilComp from "@/components/profilComp.vue";
 export default {
-  name: "Post",
+  name: "Profile",
   components: {
     sidebar,
     navComp,
-    onePostComp,
-    createComment,
-    commentComp,
+    profilComp,
   },
   props: ["id"],
   data: function() {
@@ -50,7 +44,10 @@ export default {
 </script>
 
 <style lang="scss">
-#onePost {
+#profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 89vh;
   padding-top: 11vh;
   background-color: rgb(119, 119, 119);

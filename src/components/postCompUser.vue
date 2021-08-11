@@ -51,7 +51,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "postComp",
+  name: "postCompUser",
   components: {},
   data: function() {
     return {
@@ -74,13 +74,22 @@ export default {
     ...mapGetters("authentication", {
       userName: "userName",
     }),
+    ...mapGetters("authentication", {
+      userId: "userId",
+    }),
   },
   methods: {
+    reconnectOnRefresh() {
+      let connectInfo = JSON.parse(localStorage.getItem("user"));
+
+      this.$store.dispatch("authentication/reconnect", connectInfo);
+    },
     deleteOnePost(post) {
       this.$store.dispatch("posts/deletePost", post);
     },
-    getAllPosts() {
-      this.$store.dispatch("posts/getPosts");
+    getUserPosts() {
+      console.log(this.userId);
+      this.$store.dispatch("posts/getUserPosts", this.userId);
     },
     async newComment(id) {
       if (this.content) {
@@ -96,7 +105,8 @@ export default {
     },
   },
   mounted() {
-    this.getAllPosts();
+    this.reconnectOnRefresh();
+    this.getUserPosts();
   },
 };
 </script>

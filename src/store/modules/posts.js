@@ -124,7 +124,7 @@ const posts = {
         fData.append("imageUrl", post.imageUrl);
         fData.append("author", post.author);
         fData.append("title", post.title);
-
+        fData.append("UserUuid", post.UserUuid);
         const response = await axios.post(
           "http://localhost:3000/api/posts/",
           fData,
@@ -140,6 +140,20 @@ const posts = {
       } catch (err) {
         console.log(err);
       }
+    },
+    async getUserPosts({ commit }, idUser) {
+      const auth = JSON.parse(localStorage.getItem("user"));
+      const reponse = await axios.get(
+        `http://localhost:3000/api/auth/${idUser}`,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ` + auth.token,
+          },
+        }
+      );
+      console.log(reponse.data[0].Posts);
+      commit("GET_ALL_POSTS", reponse.data[0].Posts);
     },
   },
 

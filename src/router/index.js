@@ -3,7 +3,10 @@ import Signup from "../views/Signup.vue";
 import MainPage from "../views/MainPage.vue";
 import Login from "../views/Login.vue";
 import Post from "../views/Post.vue";
+import Profile from "../views/Profile.vue";
+import User from "../views/User.vue";
 import store from "../store";
+
 const routes = [
   {
     path: "/",
@@ -31,9 +34,21 @@ const routes = [
     component: Signup,
   },
   {
+    path: "/profile",
+    name: "Profile",
+
+    component: Profile,
+  },
+  {
     path: "/post/:id",
     name: "Post",
     component: Post,
+    props: true,
+  },
+  {
+    path: "/user/:uuid",
+    name: "User",
+    component: User,
     props: true,
   },
 ];

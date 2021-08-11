@@ -42,6 +42,7 @@ const authentication = {
       commit(mutationType.SET_USER_TOKEN, authBack.token);
       commit(mutationType.IS_USER_CONNECTED, authBack.isConnected);
       commit(mutationType.SET_USER_IMAGE, authBack.imageUrl);
+      commit(mutationType.SET_USER_NAME, authBack.userName);
     },
     async setUserName({ commit }, userId) {
       try {
@@ -116,6 +117,23 @@ const authentication = {
       commit(mutationType.IS_USER_CONNECTED, false);
       localStorage.removeItem("user");
     },
+    async deleteUser({ commit }, idUser) {
+      try {
+        console.log(idUser);
+        const auth = JSON.parse(localStorage.getItem("user"));
+        await axios.delete(`http://localhost:3000/api/auth/${idUser}`, {
+          headers: {
+            Authorization: `Bearer ` + auth.token,
+          },
+        });
+        localStorage.removeItem("user");
+        commit(mutationType.SET_USER_ID, null);
+        commit(mutationType.SET_USER_TOKEN, null);
+        commit(mutationType.IS_USER_CONNECTED, false);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 
   getters: {
@@ -124,6 +142,9 @@ const authentication = {
     },
     userPic: (state) => {
       return state.imageUrl;
+    },
+    userId: (state) => {
+      return state.userId;
     },
   },
 };

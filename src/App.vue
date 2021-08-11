@@ -74,6 +74,7 @@ input:focus {
   &__img {
     margin-left: 5%;
     object-fit: cover;
+    height: 10vh;
     width: 220px;
   }
 }

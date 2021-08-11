@@ -1,7 +1,6 @@
 <template>
   <div id="main">
-    <createPostComp class="createComp" />
-    <postComp />
+    <postCompUser />
     <sidebar :open="navOpen" class="sidebar" />
     <navComp @togglenav="navOpen = !navOpen" />
     <!-- <footerComp class="footerComp" /> -->
@@ -12,18 +11,17 @@
 import { mapState } from "vuex";
 import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
-import createPostComp from "@/components/createPostComp.vue";
-import postComp from "@/components/postComp.vue";
+
+import postCompUser from "@/components/postCompUser.vue";
 // import footerComp from "@/components/footerComp.vue";
 
 export default {
-  name: "MainPage",
+  name: "User",
   components: {
     sidebar,
     navComp,
-    createPostComp,
-    postComp,
-    // footerComp,
+
+    postCompUser,
   },
   data: function() {
     return {
@@ -57,7 +55,6 @@ export default {
 #main {
   min-height: 89vh;
   padding-top: 11vh;
-  padding-bottom: 2vh;
   background-color: rgb(119, 119, 119);
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
   <transition name="show">
     <div id="sidebar" class="sidebar" v-if="open">
-      <fa icon="cog" class="sidebar__icon" />
+      <router-link to="/profile"
+        ><fa icon="cog" class="sidebar__icon"
+      /></router-link>
+
       <fa icon="sign-in-alt" class="sidebar__icon" @click="disconnect" />
     </div>
   </transition>
@@ -49,7 +52,7 @@ export default {
 .show {
   &-enter-active,
   &-leave-active {
-    transition: all 400ms;
+    transition: all 200ms;
   }
   &-enter-from,
   &-leave-to {
