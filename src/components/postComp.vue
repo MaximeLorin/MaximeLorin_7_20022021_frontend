@@ -7,7 +7,7 @@
         }}</router-link>
 
         <button
-          @click="deleteOnePost(post.id)"
+          @click="deleteOnePost(post.id, userId)"
           v-if="userName === post.author"
           class="post__delete"
         >
@@ -77,6 +77,9 @@ export default {
     ...mapGetters("authentication", {
       userName: "userName",
     }),
+    ...mapGetters("authentication", {
+      userId: "userId",
+    }),
   },
   methods: {
     deleteOneComment(comment) {
@@ -84,7 +87,11 @@ export default {
       this.$store.dispatch("posts/deleteComment", comment);
     },
     deleteOnePost(post) {
-      this.$store.dispatch("posts/deletePost", post);
+      const idUser = this.userId;
+      // const userInfo = localStorage.getItem("user");
+      // console.log(userInfo);
+      // console.log(userInfo.userId);
+      this.$store.dispatch("posts/deletePost", post + ":" + idUser);
     },
     getAllPosts() {
       this.$store.dispatch("posts/getPosts");

@@ -8,6 +8,7 @@ const POST_MUTATION_TYPE = {
   CREATE_POST: "CREATE_POST",
   CREATE_COMMENT: "CREATE_COMMENT",
   CREATE_COMMENTS: "CREATE_COMMENTS",
+  DELETE_COMMENTS: "DELETE_COMMENTS",
 };
 
 const posts = {
@@ -33,21 +34,32 @@ const posts = {
     [POST_MUTATION_TYPE.CREATE_COMMENTS](state, comment) {
       state.posts = state.posts.concat(comment);
     },
+    [POST_MUTATION_TYPE.DELETE_COMMENTS](state, comment) {
+      state.posts = state.posts.filter((post) => post.id !== comment);
+    },
   },
   actions: {
     async deletePost({ commit }, idPost) {
       try {
         const auth = JSON.parse(localStorage.getItem("user"));
+        const postId = idPost.split(":")[0];
+        // console.log(postId);
         await axios.delete(`http://localhost:3000/api/posts/${idPost}`, {
           headers: {
             Authorization: `Bearer ` + auth.token,
           },
         });
         const postList = this.state.posts.posts.filter(
-          (post) => post.id !== idPost
+          (post) => post.id !== postId
         );
-        // console.log(postList);
-        commit(POST_MUTATION_TYPE.GET_ALL_POSTS, postList);
+        const response = await axios.get("http://localhost:3000/api/posts/", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ` + auth.token,
+          },
+        });
+        console.log(postList);
+        commit("GET_ALL_POSTS", response.data);
       } catch (err) {
         console.log(err);
       }
