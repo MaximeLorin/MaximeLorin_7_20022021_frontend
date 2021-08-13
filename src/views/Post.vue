@@ -41,10 +41,15 @@ export default {
 
       this.$store.dispatch("authentication/reconnect", connectInfo);
     },
+    getComments() {
+      // console.log(this.id);
+      this.$store.dispatch("comment/getComments", this.id);
+    },
   },
   mounted() {
     this.reconnectOnRefresh();
     this.getOnePost();
+    this.getComments();
   },
 };
 </script>

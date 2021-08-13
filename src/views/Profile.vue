@@ -27,9 +27,9 @@ export default {
   },
   computed: {},
   methods: {
-    getOnePost() {
-      this.$store.dispatch("posts/getOnePost", this.id);
-    },
+    // getOnePost() {
+    //   this.$store.dispatch("posts/getOnePost", this.id);
+    // },
     reconnectOnRefresh() {
       let connectInfo = JSON.parse(localStorage.getItem("user"));
 
@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     this.reconnectOnRefresh();
-    this.getOnePost();
+    // this.getOnePost();
   },
 };
 </script>

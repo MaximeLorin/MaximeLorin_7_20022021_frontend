@@ -12,7 +12,6 @@
         type="text"
         class="createPost__title"
         placeholder="Votre titre..."
-        required
         v-model="title"
       />
 
@@ -21,7 +20,6 @@
         accept="image/png, image/jpeg, image/png, image/gif"
         class="createPost__image"
         id="file"
-        required
         @change="onFileSelected"
       />
       <label for="file" class="label-file">

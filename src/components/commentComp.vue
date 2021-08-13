@@ -1,6 +1,9 @@
 <template>
   <div id="commentBox" class="commentBox">
     <div class="comment" v-for="comment of comments" :key="comment.id">
+      <button @click="deleteOneComment(comment.id)" class="comment__delete">
+        <fa icon="times" class="delete" />
+      </button>
       <h3 class="comment__author">{{ comment.author }}</h3>
       <p class="comment__content">{{ comment.content }}</p>
     </div>
@@ -23,11 +26,13 @@ export default {
     ...mapGetters("posts", {
       post: "post",
     }),
-    ...mapGetters("posts", {
-      comments: "comments",
-    }),
   },
-  methods: {},
+  methods: {
+    deleteOneComment(comment) {
+      console.log(comment);
+      this.$store.dispatch("comment/deleteOneComment", comment);
+    },
+  },
   mounted() {},
 };
 </script>

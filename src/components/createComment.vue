@@ -28,6 +28,9 @@ export default {
     ...mapGetters("posts", {
       post: "post",
     }),
+    ...mapGetters("comment", {
+      comments: "comments",
+    }),
     ...mapGetters("authentication", {
       userName: "userName",
     }),
@@ -41,7 +44,7 @@ export default {
           postId: this.post.id,
         };
         ///console.log(commentBody);
-        this.$store.dispatch("posts/createComment", commentBody);
+        this.$store.dispatch("comment/createOneComment", commentBody);
         this.content = "";
       }
     },

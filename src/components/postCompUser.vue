@@ -87,10 +87,10 @@ export default {
     deleteOnePost(post) {
       this.$store.dispatch("posts/deletePost", post);
     },
-    getUserPosts() {
-      console.log(this.userId);
-      this.$store.dispatch("posts/getUserPosts", this.userId);
-    },
+    // getUserPosts() {
+    //   console.log(this.userId);
+    //   this.$store.dispatch("posts/getUserPosts", this.userId);
+    // },
     async newComment(id) {
       if (this.content) {
         const commentBody = {
@@ -106,7 +106,7 @@ export default {
   },
   mounted() {
     this.reconnectOnRefresh();
-    this.getUserPosts();
+    // this.getUserPosts();
   },
 };
 </script>

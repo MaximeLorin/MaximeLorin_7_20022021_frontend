@@ -8,7 +8,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
 
@@ -32,11 +32,18 @@ export default {
     ...mapState("posts", {
       posts: "posts",
     }),
+    ...mapGetters("authentication", {
+      userId: "userId",
+    }),
   },
   methods: {
     // getAllPosts() {
     //   this.$store.dispatch("posts/getPosts");
     // },
+    getUserPosts() {
+      console.log(this.userId);
+      this.$store.dispatch("posts/getUserPosts", this.userId);
+    },
     getNameById() {
       const userId = {
         userId: this.$store.state.authentication.userId,
@@ -45,7 +52,7 @@ export default {
     },
   },
   mounted() {
-    //this.getAllPosts();
+    this.getUserPosts();
     this.getNameById();
   },
 };

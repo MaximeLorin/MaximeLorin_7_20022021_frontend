@@ -46,9 +46,28 @@ const posts = {
         const postList = this.state.posts.posts.filter(
           (post) => post.id !== idPost
         );
-        console.log(postList);
-
+        // console.log(postList);
         commit(POST_MUTATION_TYPE.GET_ALL_POSTS, postList);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async deleteComment({ commit }, idComment) {
+      try {
+        const auth = JSON.parse(localStorage.getItem("user"));
+        await axios.delete(`http://localhost:3000/api/comment/${idComment}`, {
+          headers: {
+            Authorization: `Bearer ` + auth.token,
+          },
+        });
+
+        const response = await axios.get("http://localhost:3000/api/posts/", {
+          headers: {
+            Authorization: `Bearer ` + auth.token,
+          },
+        });
+        console.log(response);
+        commit(POST_MUTATION_TYPE.GET_ALL_POSTS, response.data);
       } catch (err) {
         console.log(err);
       }
@@ -152,8 +171,8 @@ const posts = {
           },
         }
       );
-      console.log(reponse.data[0].Posts);
-      commit("GET_ALL_POSTS", reponse.data[0].Posts);
+      console.log(reponse.data);
+      commit("GET_ALL_POSTS", reponse.data);
     },
   },
 

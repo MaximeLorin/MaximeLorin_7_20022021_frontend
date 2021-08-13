@@ -97,9 +97,11 @@ const authentication = {
           "http://localhost:3000/api/auth/login/",
           content
         );
+        console.log(response.data);
         commit(mutationType.SET_USER_ID, response.data.userId);
         commit(mutationType.SET_USER_TOKEN, response.data.token);
         commit(mutationType.SET_USER_IMAGE, response.data.imageUrl);
+        commit(mutationType.SET_USER_NAME, response.data.userName);
         if (response.data) {
           commit(mutationType.IS_USER_CONNECTED, true);
           localStorage.setItem(
@@ -128,8 +130,35 @@ const authentication = {
         });
         localStorage.removeItem("user");
         commit(mutationType.SET_USER_ID, null);
-        commit(mutationType.SET_USER_TOKEN, null);
-        commit(mutationType.IS_USER_CONNECTED, false);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async modifyUser({ commit }, user) {
+      try {
+        const auth = JSON.parse(localStorage.getItem("user"));
+
+        let fData = new FormData();
+        // fData.append("uuid", user.uuid);
+        fData.append("imageUrl", user.imageUrl);
+        console.log(fData);
+
+        const response = await axios.put(
+          `http://localhost:3000/api/auth/${user.uuid}`,
+          fData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
+        console.log(response.data);
+        commit(mutationType.SET_USER_IMAGE, response.data);
+        localStorage.setItem(
+          "user",
+          JSON.stringify(store.state.authentication)
+        );
       } catch (err) {
         console.log(err);
       }

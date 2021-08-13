@@ -15,7 +15,7 @@
       <p v-if="imageUrl.name !== null">{{ imageUrl.name }}</p></label
     >
     <h2 class="profilBox__info">{{ userName }}</h2>
-    <button class="profilBox__btn">Sauvegarder</button>
+    <button class="profilBox__btn" @click="modifyUser()">Sauvegarder</button>
     <button class="profilBox__btn" @click="deleteOneUser()">
       Supprimer votre compte
     </button>
@@ -40,9 +40,9 @@ export default {
     ...mapGetters("authentication", {
       userPic: "userPic",
     }),
-    ...mapGetters("posts", {
-      post: "post",
-    }),
+    // ...mapGetters("posts", {
+    //   post: "post",
+    // }),
     ...mapGetters("authentication", {
       userName: "userName",
     }),
@@ -56,11 +56,13 @@ export default {
     },
     deleteOneUser() {
       this.$store.dispatch("authentication/deleteUser", this.userId);
-      // this.$router.replace({ name: "Login" });
+      this.$store.dispatch("authentication/disconnect");
+      this.$router.replace({ name: "Login" });
     },
-  },
-  updated() {
-    // this.getComments();
+    modifyUser() {
+      const modif = { uuid: this.userId, imageUrl: this.imageUrl };
+      this.$store.dispatch("authentication/modifyUser", modif);
+    },
   },
 };
 </script>

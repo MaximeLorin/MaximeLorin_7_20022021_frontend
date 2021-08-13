@@ -40,6 +40,9 @@
       <div id="commentBox" class="commentBox">
         <div class="comment" v-for="comment of post.Comments" :key="comment.id">
           <h3 class="comment__author">{{ comment.author }}</h3>
+          <button @click="deleteOneComment(comment.id)" class="comment__delete">
+            <fa icon="times" class="delete" />
+          </button>
           <p class="comment__content">{{ comment.content }}</p>
         </div>
       </div>
@@ -76,6 +79,10 @@ export default {
     }),
   },
   methods: {
+    deleteOneComment(comment) {
+      console.log(comment);
+      this.$store.dispatch("posts/deleteComment", comment);
+    },
     deleteOnePost(post) {
       this.$store.dispatch("posts/deletePost", post);
     },

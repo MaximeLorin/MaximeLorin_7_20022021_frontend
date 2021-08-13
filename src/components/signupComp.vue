@@ -38,7 +38,7 @@
       maxlength="50"
       size="8"
     />
-    <button class="signup__button" @click="connectToApi">
+    <button class="signup__button" @click="signupToApi">
       S'inscrire
     </button>
     <router-link to="/login">Se connecter</router-link>
@@ -62,7 +62,7 @@ export default {
     },
   },
   methods: {
-    async connectToApi() {
+    async signupToApi() {
       let content = {
         userName: this.userName,
         password: this.password,
@@ -70,6 +70,10 @@ export default {
       };
 
       await this.$store.dispatch("authentication/signup", content);
+      await this.$store.dispatch("authentication/login", {
+        userName: this.userName,
+        password: this.password,
+      });
       await this.$router.replace({ name: "MainPage" });
     },
     onFileSelected(event) {
