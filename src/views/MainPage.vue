@@ -14,7 +14,6 @@ import sidebar from "@/components/sidebar.vue";
 import navComp from "@/components/navComp.vue";
 import createPostComp from "@/components/createPostComp.vue";
 import postComp from "@/components/postComp.vue";
-// import footerComp from "@/components/footerComp.vue";
 
 export default {
   name: "MainPage",
@@ -23,7 +22,6 @@ export default {
     navComp,
     createPostComp,
     postComp,
-    // footerComp,
   },
   data: function() {
     return {
@@ -36,9 +34,6 @@ export default {
     }),
   },
   methods: {
-    // getAllPosts() {
-    //   this.$store.dispatch("posts/getPosts");
-    // },
     getNameById() {
       const userId = {
         userId: this.$store.state.authentication.userId,
@@ -47,7 +42,6 @@ export default {
     },
   },
   mounted() {
-    //this.getAllPosts();
     this.getNameById();
   },
 };
@@ -55,9 +49,28 @@ export default {
 
 <style lang="scss">
 #main {
-  min-height: 89vh;
+  min-height: 87vh;
   padding-top: 11vh;
   padding-bottom: 2vh;
   background-color: rgb(119, 119, 119);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>

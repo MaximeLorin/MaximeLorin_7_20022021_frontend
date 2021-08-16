@@ -66,7 +66,7 @@ export default {
   height: 65px;
   margin-right: 5%;
   margin-left: 5%;
-  margin-top: -20px;
+  border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   border-top: solid 1px rgb(119, 119, 119);
   &__author {

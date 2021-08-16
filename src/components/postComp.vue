@@ -2,13 +2,17 @@
   <div id="post" v-for="post of posts" :key="post.id">
     <div class="post">
       <h2 class="post__author">
-        <router-link :to="{ name: 'User', params: { uuid: post.UserUuid } }">{{
-          post.author
-        }}</router-link>
+        <router-link
+          :to="{ name: 'User', params: { uuid: post.UserUuid } }"
+          class="align"
+          ><img :src="post.imageUser" alt="profile pic" class="profPic" />{{
+            post.author
+          }}</router-link
+        >
 
         <button
           @click="deleteOnePost(post.id, userId)"
-          v-if="userName === post.author"
+          v-if="userName === post.author || userAdmin"
           class="post__delete"
         >
           <fa icon="times" class="delete" />
@@ -39,10 +43,17 @@
       </div>
       <div id="commentBox" class="commentBox">
         <div class="comment" v-for="comment of post.Comments" :key="comment.id">
-          <h3 class="comment__author">{{ comment.author }}</h3>
-          <button @click="deleteOneComment(comment.id)" class="comment__delete">
-            <fa icon="times" class="delete" />
-          </button>
+          <h3 class="comment__author">
+            {{ comment.author }}
+            <button
+              @click="deleteOneComment(comment.id)"
+              v-if="userName === comment.author || userAdmin"
+              class="comment__delete"
+            >
+              <fa icon="times" class="delete" />
+            </button>
+          </h3>
+
           <p class="comment__content">{{ comment.content }}</p>
         </div>
       </div>
@@ -80,11 +91,15 @@ export default {
     ...mapGetters("authentication", {
       userId: "userId",
     }),
+    ...mapGetters("authentication", {
+      userAdmin: "userAdmin",
+    }),
   },
   methods: {
     deleteOneComment(comment) {
       console.log(comment);
-      this.$store.dispatch("posts/deleteComment", comment);
+      const idUser = this.userId;
+      this.$store.dispatch("posts/deleteComment", comment + ":" + idUser);
     },
     deleteOnePost(post) {
       const idUser = this.userId;
@@ -116,11 +131,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style lang="scss" scoped>
 #post {
   background-color: rgb(36, 36, 36);
   width: 90%;
-  height: 350px;
+  border-bottom-left-radius: 15px;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 5px;
@@ -129,9 +145,16 @@ export default {
   border-bottom-right-radius: 15px;
   // overflow: hidden;
 }
-.createComment {
-  width: 100%;
-  margin-left: 0;
+.align {
+  display: flex;
+  align-items: center;
+}
+.profPic {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 5px;
+  border: 2px solid rgb(110, 110, 110);
 }
 .delete {
   color: white;
@@ -140,8 +163,10 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  // height: 360px;
   margin-bottom: 22px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
   &__delete {
     width: 20px;
     font-size: 1.1rem;
@@ -150,7 +175,9 @@ export default {
     }
   }
   &__author {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+
     display: flex;
     justify-content: space-between;
     margin-left: 25px;
@@ -161,7 +188,6 @@ export default {
     height: 25px;
   }
   &__title {
-    margin-top: 10px;
     margin-left: 25px;
     color: white;
   }
@@ -169,7 +195,7 @@ export default {
     margin-top: 3%;
 
     width: 100%;
-    height: 210px;
+    height: 230px;
     object-fit: cover;
 
     background-color: white;
@@ -184,9 +210,12 @@ export default {
     justify-content: space-between;
     background-color: rgb(36, 36, 36);
     width: 100%;
-    height: 55px;
-
+    height: 45px;
+    border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: solid 1px rgb(119, 119, 119);
     &__author {
       margin-left: 20px;
@@ -223,24 +252,32 @@ export default {
   }
   .commentBox {
     position: relative;
-    top: 15px;
+    background-color: rgb(119, 119, 119);
   }
   .comment {
     color: white;
     background-color: rgb(36, 36, 36);
     width: 100%;
-    height: 75px;
+    height: 80px;
     position: relative;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-radius: 15px;
+    // border-top-right-radius: 15px;
+    // border-bottom-right-radius: 15px;
     border-top: solid 1px rgb(119, 119, 119);
     &__author {
       margin-left: 20px;
-      margin-top: 5px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
     }
     &__content {
       margin-left: 20px;
       margin-top: 5px;
+      width: 85%;
+      height: 25px;
+      padding: 3px;
+      border-radius: 10px;
+      background-color: rgb(138, 138, 138);
     }
   }
 }

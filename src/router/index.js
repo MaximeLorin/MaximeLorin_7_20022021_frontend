@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Post from "../views/Post.vue";
 import Profile from "../views/Profile.vue";
 import User from "../views/User.vue";
+import notFound from "../views/notFound.vue";
 import store from "../store";
 
 const routes = [
@@ -38,18 +39,45 @@ const routes = [
     name: "Profile",
 
     component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (!store.state.authentication.isConnected) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/post/:id",
     name: "Post",
     component: Post,
     props: true,
+    beforeEnter: (to, from, next) => {
+      if (!store.state.authentication.isConnected) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/user/:uuid",
     name: "User",
     component: User,
     props: true,
+    beforeEnter: (to, from, next) => {
+      if (!store.state.authentication.isConnected) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "notFound",
+
+    component: notFound,
   },
 ];
 

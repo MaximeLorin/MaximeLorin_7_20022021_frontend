@@ -1,9 +1,9 @@
 <template>
   <div id="commentBox" class="commentBox">
     <div class="comment" v-for="comment of comments" :key="comment.id">
-      <button @click="deleteOneComment(comment.id)" class="comment__delete">
-        <fa icon="times" class="delete" />
-      </button>
+      <!-- <button @click="deleteOneComment(comment.id)" class="comment__delete"> -->
+      <!-- <fa icon="times" class="delete" />
+      </button> -->
       <h3 class="comment__author">{{ comment.author }}</h3>
       <p class="comment__content">{{ comment.content }}</p>
     </div>
@@ -26,12 +26,18 @@ export default {
     ...mapGetters("posts", {
       post: "post",
     }),
+    ...mapGetters("authentication", {
+      userId: "userId",
+    }),
   },
   methods: {
-    deleteOneComment(comment) {
-      console.log(comment);
-      this.$store.dispatch("comment/deleteOneComment", comment);
-    },
+    // deleteOneComment(comment) {
+    //   const idUser = this.userId;
+    //   const postId = this.post;
+    //   console.log("mon id", postId.id);
+    //   this.$store.dispatch("comment/deleteOneComment", comment + ":" + idUser);
+    //   this.$store.dispatch("comment/getComments", postId);
+    // },
   },
   mounted() {},
 };
@@ -43,19 +49,27 @@ export default {
   color: white;
   background-color: rgb(36, 36, 36);
   width: 90%;
-  height: 75px;
-  margin-right: 5%;
   margin-left: 5%;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  height: 80px;
+  position: relative;
+  border-radius: 15px;
+  // border-top-right-radius: 15px;
+  // border-bottom-right-radius: 15px;
   border-top: solid 1px rgb(119, 119, 119);
   &__author {
     margin-left: 20px;
-    margin-top: 5px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
   }
   &__content {
     margin-left: 20px;
     margin-top: 5px;
+    width: 85%;
+    height: 25px;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(138, 138, 138);
   }
 }
 </style>

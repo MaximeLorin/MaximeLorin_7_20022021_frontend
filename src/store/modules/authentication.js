@@ -7,6 +7,7 @@ const mutationType = {
   SET_USER_NAME: "SET_USER_NAME",
   SET_USER_IMAGE: "SET_USER_IMAGE",
   IS_USER_CONNECTED: "IS_USER_CONNECTED",
+  IS_USER_ADMIN: "IS_USER_ADMIN",
 };
 
 const authentication = {
@@ -17,6 +18,7 @@ const authentication = {
     token: null,
     isConnected: false,
     userName: null,
+    isAdmin: false,
   }),
 
   mutations: {
@@ -35,6 +37,9 @@ const authentication = {
     [mutationType.SET_USER_NAME](state, userName) {
       state.userName = userName;
     },
+    [mutationType.IS_USER_ADMIN](state, isAdmin) {
+      state.isAdmin = isAdmin;
+    },
   },
   actions: {
     reconnect({ commit }, authBack) {
@@ -43,6 +48,7 @@ const authentication = {
       commit(mutationType.IS_USER_CONNECTED, authBack.isConnected);
       commit(mutationType.SET_USER_IMAGE, authBack.imageUrl);
       commit(mutationType.SET_USER_NAME, authBack.userName);
+      commit(mutationType.IS_USER_ADMIN, authBack.isAdmin);
     },
     async setUserName({ commit }, userId) {
       try {
@@ -102,6 +108,7 @@ const authentication = {
         commit(mutationType.SET_USER_TOKEN, response.data.token);
         commit(mutationType.SET_USER_IMAGE, response.data.imageUrl);
         commit(mutationType.SET_USER_NAME, response.data.userName);
+        commit(mutationType.IS_USER_ADMIN, response.data.isAdmin);
         if (response.data) {
           commit(mutationType.IS_USER_CONNECTED, true);
           localStorage.setItem(
@@ -174,6 +181,9 @@ const authentication = {
     },
     userId: (state) => {
       return state.userId;
+    },
+    userAdmin: (state) => {
+      return state.isAdmin;
     },
   },
 };

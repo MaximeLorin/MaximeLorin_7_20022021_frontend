@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="mainUser">
     <postCompUser />
     <sidebar :open="navOpen" class="sidebar" />
     <navComp @togglenav="navOpen = !navOpen" />
@@ -23,6 +23,7 @@ export default {
 
     postCompUser,
   },
+  props: ["uuid"],
   data: function() {
     return {
       navOpen: false,
@@ -40,9 +41,17 @@ export default {
     // getAllPosts() {
     //   this.$store.dispatch("posts/getPosts");
     // },
+    reconnectOnRefresh() {
+      let connectInfo = JSON.parse(localStorage.getItem("user"));
+      // console.log(connectInfo);
+      this.$store.dispatch("authentication/reconnect", connectInfo);
+      if (connectInfo.isConnected) {
+        this.$router.replace({ name: "User" });
+      }
+    },
     getUserPosts() {
-      console.log(this.userId);
-      this.$store.dispatch("posts/getUserPosts", this.userId);
+      console.log(this.uuid);
+      this.$store.dispatch("posts/getUserPosts", this.uuid);
     },
     getNameById() {
       const userId = {
@@ -52,6 +61,7 @@ export default {
     },
   },
   mounted() {
+    this.reconnectOnRefresh();
     this.getUserPosts();
     this.getNameById();
   },
@@ -59,9 +69,11 @@ export default {
 </script>
 
 <style lang="scss">
-#main {
-  min-height: 89vh;
+#mainUser {
+  min-height: 87vh;
   padding-top: 11vh;
+
+  padding-bottom: 2vh;
   background-color: rgb(119, 119, 119);
 }
 </style>

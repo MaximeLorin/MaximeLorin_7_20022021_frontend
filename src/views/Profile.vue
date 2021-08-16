@@ -34,6 +34,9 @@ export default {
       let connectInfo = JSON.parse(localStorage.getItem("user"));
 
       this.$store.dispatch("authentication/reconnect", connectInfo);
+      if (connectInfo.isConnected) {
+        this.$router.replace({ name: "Profile" });
+      }
     },
   },
   mounted() {

@@ -1,4 +1,5 @@
 import axios from "axios";
+// import comments from "./comment";
 
 //import store from "..";
 
@@ -67,6 +68,9 @@ const posts = {
     async deleteComment({ commit }, idComment) {
       try {
         const auth = JSON.parse(localStorage.getItem("user"));
+
+        const commentId = idComment.split(":")[0];
+        console.log(commentId);
         await axios.delete(`http://localhost:3000/api/comment/${idComment}`, {
           headers: {
             Authorization: `Bearer ` + auth.token,

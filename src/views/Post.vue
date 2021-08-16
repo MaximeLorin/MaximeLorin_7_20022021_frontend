@@ -40,6 +40,9 @@ export default {
       let connectInfo = JSON.parse(localStorage.getItem("user"));
 
       this.$store.dispatch("authentication/reconnect", connectInfo);
+      if (connectInfo.isConnected) {
+        this.$router.replace({ name: "Post" });
+      }
     },
     getComments() {
       // console.log(this.id);
@@ -56,8 +59,10 @@ export default {
 
 <style lang="scss">
 #onePost {
-  height: 89vh;
+  min-height: 89vh;
   padding-top: 11vh;
+  padding-bottom: 2vh;
+
   background-color: rgb(119, 119, 119);
 }
 </style>

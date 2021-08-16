@@ -55,18 +55,26 @@ const comments = {
         console.log(err);
       }
     },
-    async deleteOneComment({ commit }, idComment) {
+    async deleteOneComment({ commit }, idComment, postId) {
       try {
         const auth = JSON.parse(localStorage.getItem("user"));
+
+        const commentId = idComment.split(":")[0];
+        console.log(postId, commentId);
         await axios.delete(`http://localhost:3000/api/comment/${idComment}`, {
           headers: {
             Authorization: `Bearer ` + auth.token,
           },
         });
-        const commentList = this.state.comment.comments.filter(
-          (comment) => comment.id !== idComment
+        // const commentList = this.state.comment.comments.filter(
+        //   (comment) => comment.id !== commentId
+        // );
+        // commit(allComments.GET_ALL_COMMENTS, commentList);
+        const response = await axios.get(
+          `http://localhost:3000/api/comment?postId=${postId}`
         );
-        commit(allComments.GET_ALL_COMMENTS, commentList);
+        console.log(response.data[0].Comments);
+        commit("GET_ALL_COMMENTS", response.data[0].Comments);
       } catch (err) {
         console.log(err);
       }
