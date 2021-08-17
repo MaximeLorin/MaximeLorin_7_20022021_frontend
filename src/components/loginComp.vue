@@ -64,8 +64,8 @@ export default {
   align-items: center;
   background: rgb(36, 36, 36);
   color: white;
-  border-top-left-radius: 10%;
-  border-bottom-right-radius: 10%;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   background-clip: padding-box;
   height: 25%;
   width: 80%;
@@ -104,5 +104,12 @@ export default {
   border: solid 2px grey;
 
   background-color: white;
+}
+@media screen and (min-width: 700px) {
+  #login {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>

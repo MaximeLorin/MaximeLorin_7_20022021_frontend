@@ -7,6 +7,8 @@
         class="createComment__form--content"
         placeholder="Votre commentaire..."
         v-model="content"
+        minlength="4"
+        maxlength="40"
       />
       <button class="createComment__form--button" @click="newComment">
         <fa icon="comment" />
@@ -100,6 +102,14 @@ export default {
     color: white;
     transition-duration: 0.5s;
     cursor: pointer;
+  }
+}
+@media screen and (min-width: 700px) {
+  .createComment {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -15px;
   }
 }
 </style>

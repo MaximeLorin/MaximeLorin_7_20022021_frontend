@@ -82,4 +82,17 @@ export default {
     object-fit: cover;
   }
 }
+@media screen and (min-width: 700px) {
+  #post {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
+  .post {
+    &__image {
+      height: 450px;
+    }
+  }
+}
 </style>

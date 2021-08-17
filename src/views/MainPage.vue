@@ -73,4 +73,11 @@ export default {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+@media screen and (min-width: 700px) {
+  #main {
+    min-height: 90vh;
+    padding-top: 8vh;
+  }
+}
 </style>

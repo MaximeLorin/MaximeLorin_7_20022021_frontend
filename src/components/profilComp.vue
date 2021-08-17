@@ -82,6 +82,8 @@ export default {
   border-bottom-right-radius: 15px;
   &__info {
     color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   &__input {
     width: 0.1px;
@@ -92,6 +94,7 @@ export default {
     z-index: -1;
   }
   &__pic {
+    margin-bottom: 20px;
     width: 170px;
     height: 170px;
     border-radius: 50%;
@@ -100,9 +103,9 @@ export default {
   &__btn {
     font-weight: bold;
     border-radius: 17.5px;
-    width: 90px;
+    width: 130px;
     height: 35px;
-    margin-top: 5px;
+    margin-top: 10px;
     background-color: white;
     &:hover {
       background-color: grey;
@@ -125,6 +128,13 @@ export default {
     overflow: hidden;
     border: solid 2px grey;
     background-color: white;
+  }
+}
+@media screen and (min-width: 700px) {
+  .profilBox {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 </style>

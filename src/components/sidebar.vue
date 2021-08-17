@@ -60,4 +60,20 @@ export default {
     transform: translateX(80px);
   }
 }
+@media screen and (min-width: 700px) {
+  .sidebar {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    position: fixed;
+    top: 7vh;
+    right: -5px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar__icon {
+    margin-top: 120px;
+  }
+}
 </style>

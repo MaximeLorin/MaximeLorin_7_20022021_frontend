@@ -1,9 +1,6 @@
 <template>
   <div id="commentBox" class="commentBox">
     <div class="comment" v-for="comment of comments" :key="comment.id">
-      <!-- <button @click="deleteOneComment(comment.id)" class="comment__delete"> -->
-      <!-- <fa icon="times" class="delete" />
-      </button> -->
       <h3 class="comment__author">{{ comment.author }}</h3>
       <p class="comment__content">{{ comment.content }}</p>
     </div>
@@ -53,8 +50,7 @@ export default {
   height: 80px;
   position: relative;
   border-radius: 15px;
-  // border-top-right-radius: 15px;
-  // border-bottom-right-radius: 15px;
+
   border-top: solid 1px rgb(119, 119, 119);
   &__author {
     margin-left: 20px;
@@ -70,6 +66,13 @@ export default {
     padding: 3px;
     border-radius: 10px;
     background-color: rgb(138, 138, 138);
+  }
+}
+@media screen and (min-width: 700px) {
+  .comment {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 </style>

@@ -27,4 +27,9 @@ export default {
   font-size: 2rem;
   margin-right: 5%;
 }
+@media screen and (min-width: 700px) {
+  .bars {
+    top: 1.6vh;
+  }
+}
 </style>

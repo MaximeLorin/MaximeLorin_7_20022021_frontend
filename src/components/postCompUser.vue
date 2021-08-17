@@ -32,6 +32,8 @@
             class="createComment__form--content"
             placeholder="Votre commentaire..."
             v-model="content"
+            minlength="4"
+            maxlength="40"
           />
           <button
             class="createComment__form--button"
@@ -262,6 +264,18 @@ export default {
       padding: 3px;
       border-radius: 10px;
       background-color: rgb(138, 138, 138);
+    }
+  }
+}
+@media screen and (min-width: 700px) {
+  #post {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .post {
+    &__image {
+      height: 300px;
     }
   }
 }

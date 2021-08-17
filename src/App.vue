@@ -78,4 +78,13 @@ input:focus {
     width: 220px;
   }
 }
+
+@media screen and (min-width: 700px) {
+  .header {
+    height: 7vh;
+    &__img {
+      height: 7vh;
+    }
+  }
+}
 </style>

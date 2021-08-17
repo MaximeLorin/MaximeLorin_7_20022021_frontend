@@ -76,4 +76,10 @@ export default {
   padding-bottom: 2vh;
   background-color: rgb(119, 119, 119);
 }
+@media screen and (min-width: 700px) {
+  #mainUser {
+    min-height: 90vh;
+    padding-top: 8vh;
+  }
+}
 </style>

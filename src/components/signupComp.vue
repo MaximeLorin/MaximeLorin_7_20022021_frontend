@@ -157,4 +157,11 @@ export default {
   border: solid 2px grey;
   background-color: white;
 }
+@media screen and (min-width: 700px) {
+  #signup {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 </style>

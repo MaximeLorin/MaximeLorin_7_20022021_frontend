@@ -13,6 +13,8 @@
         class="createPost__title"
         placeholder="Votre titre..."
         v-model="title"
+        minlength="4"
+        maxlength="64"
       />
 
       <input
@@ -182,6 +184,14 @@ export default {
     overflow: hidden;
     border: solid 2px grey;
     background-color: white;
+  }
+}
+@media screen and (min-width: 700px) {
+  #postCreate {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
   }
 }
 </style>

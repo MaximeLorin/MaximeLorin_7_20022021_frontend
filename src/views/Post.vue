@@ -59,7 +59,7 @@ export default {
 
 <style lang="scss">
 #onePost {
-  min-height: 89vh;
+  min-height: 87vh;
   padding-top: 11vh;
   padding-bottom: 2vh;
 

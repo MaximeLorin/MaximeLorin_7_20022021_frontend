@@ -1,10 +1,11 @@
 <template>
-  <div class="notFoundBox"><h1 class="notFoundBox__text">PAGE 404</h1></div>
+  <div class="comp404"><notFoundComp /></div>
 </template>
 <script>
+import notFoundComp from "@/components/notFoundComp.vue";
 export default {
   name: "notFound",
-  components: {},
+  components: { notFoundComp },
   data: function() {
     return {
       navOpen: false,
@@ -22,4 +23,11 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.comp404 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

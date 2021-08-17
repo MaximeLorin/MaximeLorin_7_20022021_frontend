@@ -32,6 +32,8 @@
             class="createComment__form--content"
             placeholder="Votre commentaire..."
             v-model="content"
+            minlength="4"
+            maxlength="40"
           />
           <button
             class="createComment__form--button"
@@ -44,7 +46,11 @@
       <div id="commentBox" class="commentBox">
         <div class="comment" v-for="comment of post.Comments" :key="comment.id">
           <h3 class="comment__author">
-            {{ comment.author }}
+            <router-link
+              :to="{ name: 'User', params: { uuid: post.UserUuid } }"
+              class="align"
+              >{{ comment.author }}</router-link
+            >
             <button
               @click="deleteOneComment(comment.id)"
               v-if="userName === comment.author || userAdmin"
@@ -140,10 +146,9 @@ export default {
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 5px;
-  // margin-bottom: 5px;
+
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  // overflow: hidden;
 }
 .align {
   display: flex;
@@ -278,6 +283,18 @@ export default {
       padding: 3px;
       border-radius: 10px;
       background-color: rgb(138, 138, 138);
+    }
+  }
+}
+@media screen and (min-width: 700px) {
+  #post {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .post {
+    &__image {
+      height: 300px;
     }
   }
 }
