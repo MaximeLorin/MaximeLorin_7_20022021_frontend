@@ -110,7 +110,7 @@ export default {
     deleteOnePost(post) {
       const idUser = this.userId;
       // const userInfo = localStorage.getItem("user");
-      // console.log(userInfo);
+      console.log(post);
       // console.log(userInfo.userId);
       this.$store.dispatch("posts/deletePost", post + ":" + idUser);
     },

@@ -44,22 +44,22 @@ const posts = {
       try {
         const auth = JSON.parse(localStorage.getItem("user"));
         const postId = idPost.split(":")[0];
-        // console.log(postId);
+        console.log(postId);
         await axios.delete(`http://localhost:3000/api/posts/${idPost}`, {
           headers: {
             Authorization: `Bearer ` + auth.token,
           },
         });
-        const postList = this.state.posts.posts.filter(
-          (post) => post.id !== postId
-        );
+        // const postList = this.state.posts.posts.filter(
+        //   (post) => post.id !== postId
+        // );
         const response = await axios.get("http://localhost:3000/api/posts/", {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ` + auth.token,
           },
         });
-        console.log(postList);
+        // console.log(postList);
         commit("GET_ALL_POSTS", response.data);
       } catch (err) {
         console.log(err);
