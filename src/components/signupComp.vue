@@ -20,7 +20,7 @@
       type="text"
       id="userName"
       name="userName"
-      placeholder="Adresse mail"
+      placeholder="Nom d'utilisateur"
       required
       minlength="4"
       maxlength="50"
