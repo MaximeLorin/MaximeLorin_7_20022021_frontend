@@ -35,7 +35,7 @@
       placeholder="Mot de passe"
       required
       minlength="4"
-      maxlength="50"
+      maxlength="20"
       size="8"
     />
     <button class="signup__button" @click="signupToApi">

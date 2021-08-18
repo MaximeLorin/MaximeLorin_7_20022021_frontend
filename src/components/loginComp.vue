@@ -22,7 +22,7 @@
       placeholder="Mot de passe"
       required
       minlength="4"
-      maxlength="8"
+      maxlength="20"
       size="8"
     />
     <button class="login__button" type="button" @click="connectToApi">
