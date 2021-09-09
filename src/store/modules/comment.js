@@ -22,7 +22,7 @@ const comments = {
     async getComments({ commit }, postId) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/comment?postId=${postId}`
+          `https://intense-springs-06763.herokuapp.com/api/comment?postId=${postId}`
         );
         // console.log(response.data[0].Comments);
         commit("GET_ALL_COMMENTS", response.data[0].Comments);
@@ -41,7 +41,7 @@ const comments = {
         };
         console.log(toSend);
         const response = await axios.post(
-          "http://localhost:3000/api/comment/",
+          "https://intense-springs-06763.herokuapp.com/api/comment/",
           toSend,
           {
             headers: {
@@ -61,17 +61,20 @@ const comments = {
 
         const commentId = idComment.split(":")[0];
         console.log(postId, commentId);
-        await axios.delete(`http://localhost:3000/api/comment/${idComment}`, {
-          headers: {
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        await axios.delete(
+          `https://intense-springs-06763.herokuapp.com/api/comment/${idComment}`,
+          {
+            headers: {
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
         // const commentList = this.state.comment.comments.filter(
         //   (comment) => comment.id !== commentId
         // );
         // commit(allComments.GET_ALL_COMMENTS, commentList);
         const response = await axios.get(
-          `http://localhost:3000/api/comment?postId=${postId}`
+          `https://intense-springs-06763.herokuapp.com/api/comment?postId=${postId}`
         );
         console.log(response.data[0].Comments);
         commit("GET_ALL_COMMENTS", response.data[0].Comments);

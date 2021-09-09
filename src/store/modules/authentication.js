@@ -53,7 +53,7 @@ const authentication = {
     async setUserName({ commit }, userId) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/auth/byid",
+          "https://intense-springs-06763.herokuapp.com/api/auth/byid",
           userId
         );
         commit(mutationType.SET_USER_NAME, response.data);
@@ -69,7 +69,7 @@ const authentication = {
         fData.append("imageUrl", userAuth.imageUrl);
         console.log(fData);
         const response = await axios.post(
-          "http://localhost:3000/api/auth/signup/",
+          "https://intense-springs-06763.herokuapp.com/api/auth/signup/",
           fData,
           {
             headers: {
@@ -100,7 +100,7 @@ const authentication = {
           password: userAuth.password,
         };
         const response = await axios.post(
-          "http://localhost:3000/api/auth/login/",
+          "https://intense-springs-06763.herokuapp.com/api/auth/login/",
           content
         );
         console.log(response.data);
@@ -130,11 +130,14 @@ const authentication = {
       try {
         console.log(idUser);
         const auth = JSON.parse(localStorage.getItem("user"));
-        await axios.delete(`http://localhost:3000/api/auth/${idUser}`, {
-          headers: {
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        await axios.delete(
+          `https://intense-springs-06763.herokuapp.com/api/auth/${idUser}`,
+          {
+            headers: {
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
         localStorage.removeItem("user");
         commit(mutationType.SET_USER_ID, null);
       } catch (err) {
@@ -151,7 +154,7 @@ const authentication = {
         console.log(fData);
 
         const response = await axios.put(
-          `http://localhost:3000/api/auth/${user.uuid}`,
+          `https://intense-springs-06763.herokuapp.com/api/auth/${user.uuid}`,
           fData,
           {
             headers: {

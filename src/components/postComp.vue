@@ -159,6 +159,7 @@ export default {
   height: 40px;
   border-radius: 100%;
   margin-right: 5px;
+  object-fit: cover;
   border: 2px solid rgb(110, 110, 110);
 }
 .delete {

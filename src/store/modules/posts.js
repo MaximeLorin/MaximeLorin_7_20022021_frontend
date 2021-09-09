@@ -45,20 +45,26 @@ const posts = {
         const auth = JSON.parse(localStorage.getItem("user"));
         const postId = idPost.split(":")[0];
         console.log(postId);
-        await axios.delete(`http://localhost:3000/api/posts/${idPost}`, {
-          headers: {
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        await axios.delete(
+          `https://intense-springs-06763.herokuapp.com/api/posts/${idPost}`,
+          {
+            headers: {
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
         // const postList = this.state.posts.posts.filter(
         //   (post) => post.id !== postId
         // );
-        const response = await axios.get("http://localhost:3000/api/posts/", {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        const response = await axios.get(
+          "https://intense-springs-06763.herokuapp.com/api/posts/",
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
         // console.log(postList);
         commit("GET_ALL_POSTS", response.data);
       } catch (err) {
@@ -71,17 +77,23 @@ const posts = {
 
         const commentId = idComment.split(":")[0];
         console.log(commentId);
-        await axios.delete(`http://localhost:3000/api/comment/${idComment}`, {
-          headers: {
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        await axios.delete(
+          `https://intense-springs-06763.herokuapp.com/api/comment/${idComment}`,
+          {
+            headers: {
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
 
-        const response = await axios.get("http://localhost:3000/api/posts/", {
-          headers: {
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        const response = await axios.get(
+          "https://intense-springs-06763.herokuapp.com/api/posts/",
+          {
+            headers: {
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
         console.log(response);
         commit(POST_MUTATION_TYPE.GET_ALL_POSTS, response.data);
       } catch (err) {
@@ -99,7 +111,7 @@ const posts = {
         };
 
         const response1 = await axios.post(
-          "http://localhost:3000/api/comment/",
+          "https://intense-springs-06763.herokuapp.com/api/comment/",
           toSend,
           {
             headers: {
@@ -108,12 +120,15 @@ const posts = {
           }
         );
         console.log(response1);
-        const response = await axios.get("http://localhost:3000/api/posts/", {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        const response = await axios.get(
+          "https://intense-springs-06763.herokuapp.com/api/posts/",
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
 
         commit("GET_ALL_POSTS", response.data);
       } catch (err) {
@@ -125,12 +140,15 @@ const posts = {
       try {
         const auth = JSON.parse(localStorage.getItem("user"));
 
-        const response = await axios.get("http://localhost:3000/api/posts/", {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ` + auth.token,
-          },
-        });
+        const response = await axios.get(
+          "https://intense-springs-06763.herokuapp.com/api/posts/",
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ` + auth.token,
+            },
+          }
+        );
         commit("GET_ALL_POSTS", response.data);
 
         // console.log(response.data);
@@ -141,7 +159,7 @@ const posts = {
     async getOnePost({ commit }, idPost) {
       const auth = JSON.parse(localStorage.getItem("user"));
       const reponse = await axios.get(
-        `http://localhost:3000/api/posts/${idPost}`,
+        `https://intense-springs-06763.herokuapp.com/api/posts/${idPost}`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -153,7 +171,7 @@ const posts = {
     },
     async createPost({ commit }, post) {
       try {
-        const auth = localStorage.getItem("user");
+        const auth = JSON.parse(localStorage.getItem("user"));
 
         let fData = new FormData();
         fData.append("imageUrl", post.imageUrl);
@@ -161,12 +179,12 @@ const posts = {
         fData.append("title", post.title);
         fData.append("UserUuid", post.UserUuid);
         const response = await axios.post(
-          "http://localhost:3000/api/posts/",
+          "https://intense-springs-06763.herokuapp.com/api/posts/",
           fData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${auth.token}`,
+              Authorization: `Bearer ` + auth.token,
             },
           }
         );
@@ -179,7 +197,7 @@ const posts = {
     async getUserPosts({ commit }, idUser) {
       const auth = JSON.parse(localStorage.getItem("user"));
       const reponse = await axios.get(
-        `http://localhost:3000/api/auth/${idUser}`,
+        `https://intense-springs-06763.herokuapp.com/api/auth/${idUser}`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
